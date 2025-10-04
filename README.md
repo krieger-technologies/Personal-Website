@@ -1,3 +1,16 @@
+# My First JS React Website
+- My first goal was to create a static website hosted on AWS. Something simple and to get me familiar with some web dev basics.
+  - Interesting problems here were how to register my domain and set up my AWS environment to host my static website
+  - Also ensuring that my website was using https
+- Next I built out a couple different pages, an About Me, Reusume, and Project sections
+- I added in a nav bar and loading graphics for some basic functionality and aesthetics
+  - Some interesting and fun challenges here were to make a scrollable transluscent text box over my background
+  - Flexible optimization for mobile and desktop
+- Additional troubleshooting to figure out why my website would error out when opened from in-app browsers
+  - This ended up being a domain issue where my website was only registered to website-url.com, however many in-app browsers will try to open a website by automatically appending www. to the front, so it was not able to find my domain. Once I registered a second address with www. at the front my website was able to load without issue in in-app browsers
+- I am now working on updating my nav bar to look more modern and asthetic
+- I am also working on taking my website from dynamic to static and creating a data dashboard with a live data feed that can run autonomously within my AWS env
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
