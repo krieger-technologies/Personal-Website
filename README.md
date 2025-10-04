@@ -10,6 +10,8 @@
   - This ended up being a domain issue where my website was only registered to website-url.com, however many in-app browsers will try to open a website by automatically appending www. to the front, so it was not able to find my domain. Once I registered a second address with www. at the front my website was able to load without issue in in-app browsers
 - I am now working on updating my nav bar to look more modern and asthetic
 - I am also working on taking my website from dynamic to static and creating a data dashboard with a live data feed that can run autonomously within my AWS env
+<img width="1917" height="953" alt="image" src="https://github.com/user-attachments/assets/e4f281ee-0155-4769-9d1b-20d01e7c5784" />
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Getting Started with Create React App
 
