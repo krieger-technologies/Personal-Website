@@ -1,0 +1,38 @@
+.AboutMe {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../imgs/make-abstract-gradient-from-green-light-blue-with-dynamic-white-lines.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+  }
+
+.AboutMeContent {
+background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background for readability */
+padding: 20px; /* Padding around the text */
+border-radius: 10px; /* Rounded corners for a softer look */
+max-width: 600px; /* Limit the width of the content */
+text-align: left; /* Align text to the left */
+}
+
+  /* Mobile optimization */
+@media (max-width: 768px) {
+.AboutMeContent {
+      width: 80%; /* Reduce content width on mobile devices */
+      max-height: calc(100vh - 350px); /* Adjust height to fit within viewport above navbar */
+      overflow-y: auto;
+      max-width: 90%; /* Ensure it does not get too large */
+      margin: 20px auto; /* Provide more margin around the edges */
+      padding: 15px; /* Slightly reduce padding for better fit */
+      padding-top: 5px;
+      padding-bottom: 20px;
+      /* background adjustments */
+      background-size: contain; /* Adjusts the size of the image to fit within the viewport */
+      background-position: center top; /* Aligns image to the top center */
+  }
+}

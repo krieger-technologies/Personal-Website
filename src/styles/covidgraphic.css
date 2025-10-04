@@ -1,0 +1,27 @@
+.covidHTML {
+    background-color: rgba(0, 0, 0, 0.0); /* Semi-transparent background for readability */
+    text-align: center;
+    justify-items: center;
+    padding: 0px;
+    max-height: calc(100vh - 250px); /* Adjust height to fit within viewport above navbar */
+    margin-top: 0px; /* Add space above the chart */
+    width: 100%; /* Ensure it takes full width */
+    max-width: 5000px; /* Optional: Set a max-width to prevent stretching */
+    overflow: hidden; /* Hide any overflow if necessary */
+  
+    border-radius: 20px; /* Rounded corners for a softer look */
+}
+
+  /* Mobile optimization */
+  @media (max-width: 768px) {
+    .BBcovidHTML {
+        width: 20%; /* Reduce content width on mobile devices */
+        max-height: calc(100vh - 250px); /* Adjust height to fit within viewport above navbar */
+        overflow-y: auto;
+        max-width: calc(100vh - 150px); /* Ensure it does not get too large */
+        margin: 0px auto; /* Provide more margin around the edges */
+        padding: 0px; /* Slightly reduce padding for better fit */
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+  }

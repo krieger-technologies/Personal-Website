@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+    /* background-image: url('../imgs/analytics-02.jpg'); */
+    background-size: 100% auto; /* Fit horizontally, maintain aspect ratio */
+    background-position: top center; /* Align to top center */
+    background-repeat: repeat-y; /* Repeat vertically */
+    background-attachment: fixed; /* Fixed relative to the viewport */
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+  
+  .Resume {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../imgs/analytics-02.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+  }
+  
+  .ResumeContent {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for readability */
+    padding: 20px; /* Padding around the text */
+    border-radius: 20px; /* Rounded corners for a softer look */
+    max-width: 600px; /* Limit the width of the content */
+    width: 100%; /* Ensure box takes full width up to max-width */
+    box-sizing: border-box; /* Include padding in width */
+    text-align: left; /* Align text to the left */
+    max-height: calc(100vh - 140px); /* Adjust height to fit within viewport above navbar */
+    overflow-y: auto; /* Add scrollbar if content overflows */
+    position: relative;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.3); /* For Firefox */
+  }
+  
+  .ResumeContent::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+  }
+  
+  .ResumeContent::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5); /* Color of the scrollbar thumb */
+    border-radius: 80px; /* Rounded corners for the scrollbar thumb */
+  }
+  
+  .ResumeContent::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3); /* Background color of the scrollbar track */
+    border-radius: 80px; /* Rounded corners for the scrollbar track */
+  }
+  .ResumeContent h1 {
+    margin-bottom: 10px; /* Space below the heading */
+    text-align: center; /* Center only the heading */
+  }
+
+  /* Mobile optimization */
+@media (max-width: 768px) {
+  .ResumeContent {
+      width: 80%; /* Reduce content width on mobile devices */
+      max-height: calc(100vh - 350px); /* Adjust height to fit within viewport above navbar */
+      overflow-y: auto;
+      max-width: 90%; /* Ensure it does not get too large */
+      margin: 20px auto; /* Provide more margin around the edges */
+      padding: 15px; /* Slightly reduce padding for better fit */
+      padding-top: 5px;
+      padding-bottom: 20px;
+  }
+}

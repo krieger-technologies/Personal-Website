@@ -1,0 +1,51 @@
+/* Navbar CSS */
+.navbar {
+  background: linear-gradient(
+      to top, 
+      rgba(128, 128, 128, 0.8) 0%,  
+      rgba(192, 192, 192, 0.3) 100%   
+    ); /* Semi-transparent grey background */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center items vertically */
+  z-index: 1000; /* Ensure the navbar is above other elements */
+}
+
+.nav-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.nav-links li {
+  flex: 1; /* Make each list item take up equal space */
+  display: flex; /* Use flexbox to center content */
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
+}
+
+.nav-links a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  width: 100%; /* Make each link fill the full width of its parent */
+  height: 100%; /* Ensure the link fills the entire height of the navbar */
+  box-sizing: border-box; /* Ensure padding is included in the element's width/height */
+}
+
+.nav-links a:hover {
+  background: linear-gradient(
+    to top, 
+    rgba(3, 44, 76, 0.8) 0%,  
+    rgba(3, 44, 76, 0.3) 100%
+  );
+  color: white;
+}

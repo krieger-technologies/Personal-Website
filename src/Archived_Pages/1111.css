@@ -1,0 +1,46 @@
+.secretpage{
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../imgs/leather-backpack-accompanied-by-travel-journal.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: black;
+}
+
+.secretpagecontent {
+    background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent background for readability */
+    padding: 20px; /* Padding around the text */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    max-width: 600px; /* Limit the width of the content */
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width */
+    text-align: left; /* Align text to the left */
+    max-height: calc(100vh - 200px); /* Adjust height to fit within viewport above navbar */
+    overflow-y: auto; /* Add scrollbar if content overflows */
+    position: relative;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.3); /* For Firefox */
+    }
+
+.secretpagecontent h1 {
+    margin-bottom: 10px; /* Space below the heading */
+    text-align: center; /* Center only the heading */
+    }
+/* Mobile optimization */
+@media (max-width: 768px) {
+    .secretpagecontent {
+        width: 80%; /* Reduce content width on mobile devices */
+        max-height: calc(100vh - 350px); /* Adjust height to fit within viewport above navbar */
+        overflow-y: auto;
+        max-width: 90%; /* Ensure it does not get too large */
+        margin: 20px auto; /* Provide more margin around the edges */
+        padding: 15px; /* Slightly reduce padding for better fit */
+        padding-top: 5px;
+        padding-bottom: 20px;
+    }
+    }

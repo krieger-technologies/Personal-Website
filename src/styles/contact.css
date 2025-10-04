@@ -1,0 +1,15 @@
+.Contact {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../imgs/lo-fi-cozy-room-wallpaper - 02.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+  }
+
+  /* Mobile optimization */

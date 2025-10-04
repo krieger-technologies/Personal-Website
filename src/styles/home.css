@@ -1,0 +1,34 @@
+.Home {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../imgs/lo-fi-cozy-room-wallpaper - 02.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+  }
+
+  .HomeContent {
+    background-color: rgba(0, 0, 0, 0.55); /* Semi-transparent background for readability */
+    padding: 5px; /* Padding around the text */
+    border-radius: 15px; /* Rounded corners for a softer look */
+    max-width: 300px; /* Limit the width of the content */
+    width: 100%; /* Ensure box takes full width up to max-width */
+    box-sizing: border-box; /* Include padding in width */
+    text-align: center; /* Align text to the left */
+    max-height: calc(100vh - 140px); /* Adjust height to fit within viewport above navbar */
+  }
+
+  /* Mobile optimization */
+  @media (max-width: 768px) {
+    .HomeContent {
+        width: 80%; /* Reduce content width on mobile devices */
+        max-height: calc(100vh - 100px); /* Adjust height to fit within viewport above navbar */
+        overflow-y: auto;
+        max-width: 70%; /* Ensure it does not get too large */
+        margin: 5px auto; /* Provide more margin around the edges */
+    }
+  }
