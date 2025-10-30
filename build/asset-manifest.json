@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.31921ebc.css",
+    "main.js": "/static/js/main.2ad220ea.js",
+    "static/js/453.903d23b1.chunk.js": "/static/js/453.903d23b1.chunk.js",
+    "static/media/lo-fi-cozy-room-wallpaper - 02.jpg": "/static/media/lo-fi-cozy-room-wallpaper - 02.6364cb4db74bd4c9a5c5.jpg",
+    "static/media/anime-style-cozy-home-interior.jpg": "/static/media/anime-style-cozy-home-interior.85065d8428a878bdd4fa.jpg",
+    "static/media/man-is-working-laptop-writing-paper.jpg": "/static/media/man-is-working-laptop-writing-paper.362283ca1b4b497bf218.jpg",
+    "static/media/make-abstract-gradient-from-green-light-blue-with-dynamic-white-lines.jpg": "/static/media/make-abstract-gradient-from-green-light-blue-with-dynamic-white-lines.bbd11bcbccbc13db5fe9.jpg",
+    "static/media/analytics-02.jpg": "/static/media/analytics-02.aa85036e771be5e0514d.jpg",
+    "index.html": "/index.html",
+    "main.31921ebc.css.map": "/static/css/main.31921ebc.css.map",
+    "main.2ad220ea.js.map": "/static/js/main.2ad220ea.js.map",
+    "453.903d23b1.chunk.js.map": "/static/js/453.903d23b1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31921ebc.css",
+    "static/js/main.2ad220ea.js"
+  ]
+}

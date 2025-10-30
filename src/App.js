@@ -38,7 +38,6 @@ export default function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/MakenaBirthday" element={<MakenaBirthday />} /> */}
         </Routes>
       )}
     </div>
