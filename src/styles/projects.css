@@ -62,7 +62,7 @@ body {
   @media (max-width: 768px) {
 .FirstProject {
   width: 80%; /* Reduce content width on mobile devices */
-  max-height: calc(100vh - 450px); /* Adjust height to fit within viewport above navbar */
+  height: calc(100vh - 300px); /* Adjust height to fit within viewport above navbar */
   overflow-y: auto;
   max-width: 90%; /* Ensure it does not get too large */
   margin: 20px auto; /* Provide more margin around the edges */

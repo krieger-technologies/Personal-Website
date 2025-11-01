@@ -10,7 +10,7 @@ const Projects = () => {
       <div className="FirstProject">
         <h1>Projects</h1>
         <p>
-          Projects page is currently undergoing a large overhaul.<br/>
+          Projects page is currently undergoing a large overhaul.<br/><br/>
           I am currently working on moving a local ETL pipeline I built onto an AWS lambda instance that will be able to pull live data
           from the web and create an interractive dashboard. 
           I have currently hit some roadblocks related to importing the packages I need into the function/layers so I am currently exploring
