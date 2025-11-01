@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.e1a3a48e.css",
+    "main.css": "/static/css/main.ab59325a.css",
     "main.js": "/static/js/main.351575e5.js",
     "static/js/453.903d23b1.chunk.js": "/static/js/453.903d23b1.chunk.js",
     "static/media/lo-fi-cozy-room-wallpaper - 02.jpg": "/static/media/lo-fi-cozy-room-wallpaper - 02.6364cb4db74bd4c9a5c5.jpg",
@@ -9,12 +9,12 @@
     "static/media/make-abstract-gradient-from-green-light-blue-with-dynamic-white-lines.jpg": "/static/media/make-abstract-gradient-from-green-light-blue-with-dynamic-white-lines.bbd11bcbccbc13db5fe9.jpg",
     "static/media/analytics-02.jpg": "/static/media/analytics-02.aa85036e771be5e0514d.jpg",
     "index.html": "/index.html",
-    "main.e1a3a48e.css.map": "/static/css/main.e1a3a48e.css.map",
+    "main.ab59325a.css.map": "/static/css/main.ab59325a.css.map",
     "main.351575e5.js.map": "/static/js/main.351575e5.js.map",
     "453.903d23b1.chunk.js.map": "/static/js/453.903d23b1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e1a3a48e.css",
+    "static/css/main.ab59325a.css",
     "static/js/main.351575e5.js"
   ]
 }

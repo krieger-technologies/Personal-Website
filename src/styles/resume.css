@@ -32,7 +32,7 @@ body {
     width: 100%; /* Ensure box takes full width up to max-width */
     box-sizing: border-box; /* Include padding in width */
     text-align: left; /* Align text to the left */
-    max-height: calc(100vh - 140px); /* Adjust height to fit within viewport above navbar */
+    height: calc(100vh - 180px); /* Adjust height to fit within viewport above navbar */
     overflow-y: auto; /* Add scrollbar if content overflows */
     position: relative;
     scrollbar-width: thin; /* For Firefox */
@@ -61,7 +61,7 @@ body {
 @media (max-width: 768px) {
   .ResumeContent {
       width: 80%; /* Reduce content width on mobile devices */
-      height: calc(100vh - 300px); /* Adjust height to fit within viewport above navbar */
+      height: calc(100vh - 350px); /* Adjust height to fit within viewport above navbar */
       overflow-y: auto;
       max-width: 90%; /* Ensure it does not get too large */
       margin: 20px auto; /* Provide more margin around the edges */
