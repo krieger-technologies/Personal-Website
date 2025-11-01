@@ -19,7 +19,8 @@ const Projects = () => {
           <br/>
           <br/>
           Below is a graphic I made in a similar exercise in the past.<br/>
-          Although I do like plotly for small personal projects and graphics, the interactivity does not show as well as part of a website like this as well as it feels quite clunky on mobile.
+          Although I do like plotly for small personal projects and graphics, 
+          it doesn't scale super well to the page and the interractivity is clunky. It seems this particular type of graphic is better suited for other aplications.
 
         </p>
         <div className='graph-container'>
