@@ -1,2 +1,2 @@
-build/* linguist-vendored
-node_modules/* linguist-vendored
+build/** linguist-vendored
+node_modules/** linguist-vendored
