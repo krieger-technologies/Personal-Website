@@ -1,33 +1,35 @@
 import '../styles/projects.css';
-// import '../styles/graph-container.css';
 import CovidGraphic from '../charts/covid.js';
+// import ProjectCarousel and cards
+import ProjectCarousel from '../components/ProjectCarousel';
+import NewsScraperCard from '../components/cards/NewsScraper';
+import HomeLabCard from '../components/cards/HomeLab';
 
-/* function Projects() { */
-const Projects = () => {
+export default function Projects() {
+    const projectData = [
+    { title: "News Scraper", component: NewsScraperCard },
+    { title: "Home Lab Setup", component: HomeLabCard }
+  ];
   return (
     <div className="Projects">
       <div className="FirstProject">
         <h1>Projects</h1>
         <p>
           Projects page is currently undergoing a large overhaul.<br/><br/>
-          I am currently working on moving a local ETL pipeline I built onto an AWS lambda instance that will be able to pull live data
-          from the web and create an interractive dashboard. 
-          I have currently hit some roadblocks related to importing the packages I need into the function/layers so I am currently exploring
-          some creative solutions to work around that.
-          <br/>
-          <br/>
-          <br/>
-          Below is a graphic I made in a similar exercise in the past.<br/>
-          Although I do like plotly for small personal projects and graphics, 
-          it doesn't scale super well to the page and the interractivity is clunky. It seems this particular type of graphic is better suited for other aplications.
-
+          I am currently trying to move a local ETL pipeline I wrote in python onto my AWS instance to run live and provide automated and up-to-date
+          graphics and data to my website, however I ran into some size restrictions in the lambda/layers environment so I am currently exploring
+          some creative solutions on how to work around this.
         </p>
-        <div className='graph-container'>
-        <CovidGraphic />
+
+        <div className="graph-container">
+          <CovidGraphic />
+        </div>
+        
+        {/* Embed carousel inside opaque content box */}
+        <div style={{ marginTop: "30px" }}>
+          <ProjectCarousel projects={projectData} />
         </div>
       </div>
     </div>
-  );
-}
-
-export default Projects;
+  )
+};

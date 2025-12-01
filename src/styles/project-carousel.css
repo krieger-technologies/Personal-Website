@@ -1,0 +1,16 @@
+.project-card {
+  background: rgba(88, 94, 100, 0.50); /* keeps the opaque look */
+  border-radius: 16px;
+  padding: 16px;
+  height: 100%;           /* fills the carousel slide height */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card-scrollable-content {
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-right: 8px; /* avoid overlap with scrollbar */
+}
