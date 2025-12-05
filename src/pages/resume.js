@@ -41,10 +41,6 @@ const Resume = () => {
           </li>
           <li>Conversion of several suites of reports from platforms scheduled to be decommissioned onto my team’s reporting platform. Over 50 reports across 3 platforms to date.</li>
           <li>Development of new reporting and analytics for clients and internal monitoring</li>
-          <li>
-            I am the Generative AI SME for my team and am working on developing an internal GPT to assist users with accurately interpreting our reporting,
-            creating their own reports, and submitting requests to our team!
-          </li>
           <p></p>
           <li><b>Tools:</b> Incorta, Spark SQL, PySpark, Python, Excel</li>
         </ul>

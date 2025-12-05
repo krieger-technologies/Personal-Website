@@ -37,8 +37,20 @@ body {
     position: relative;
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.3); /* For Firefox */
+
+
+  /* Top + bottom fade (text floats into background) */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 85%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+
+  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 85%, transparent 100%);
+  mask-repeat: no-repeat;
+  mask-size: cover;
   }
   
+
+  /* scroll bar element */
   .ResumeContent::-webkit-scrollbar {
     width: 12px; /* Width of the scrollbar */
   }

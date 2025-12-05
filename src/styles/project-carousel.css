@@ -1,16 +1,60 @@
+/* -- PROJECT CARD -- */
 .project-card {
-  background: rgba(88, 94, 100, 0.50); /* keeps the opaque look */
+  background: rgba(88, 94, 100, 0.50);
   border-radius: 16px;
   padding: 16px;
-  height: 100%;           /* fills the carousel slide height */
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+/* -- SCROLLABLE CONTENT -- */
 .card-scrollable-content {
   overflow-y: auto;
   flex-grow: 1;
-  padding-right: 8px; /* avoid overlap with scrollbar */
+  padding-right: 8px;
+}
+/* update correct auto scroll calc between cards */
+.slide-inner {
+  position: relative;
+  transform: none !important;
+}
+
+/* ---------------------------------------------------------
+   UNIFIED PAGINATION STYLES (top & bottom identical)
+---------------------------------------------------------- */
+.swiper-pagination-top,
+.swiper-pagination-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  /* Make spacing identical in both bars */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important; /* matches Swiper defaults */
+}
+
+/* Positioning only */
+.swiper-pagination-top {
+  top: 10px;
+}
+
+.swiper-pagination-bottom {
+  bottom: 10px;
+}
+
+/* Force bullets to use the same spacing */
+.swiper-pagination-top .swiper-pagination-bullet,
+.swiper-pagination-bottom .swiper-pagination-bullet {
+  margin: 0 !important;    /* override Swiper’s default margin: 0 4px */
+}
+
+/* Optional: keep the selected dot styled the same */
+.swiper-pagination-bullet-active {
+  opacity: 1;
 }
