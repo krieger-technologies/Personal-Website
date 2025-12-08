@@ -12,6 +12,12 @@
     color: white;
   }
 
+  /* paragraph indenting for body */
+  .indent {
+    text-indent: 2em; /* adjust to taste */
+    margin-top: 1rem; /* optional for spacing */
+  }
+
 .AboutMeContent {
 background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background for readability */
 padding: 20px; /* Padding around the text */

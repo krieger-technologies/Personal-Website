@@ -9,6 +9,12 @@ body {
   color: black;
   font-family: Arial, sans-serif;
 }
+/* paragraph indenting for body */
+.indent {
+  text-indent: 2em; /* adjust to taste */
+  margin-top: 1rem; /* optional for spacing */
+}
+
 
 .Projects {
   text-align: center;
