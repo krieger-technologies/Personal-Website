@@ -1,28 +1,61 @@
 import { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
+const isMobile = window.matchMedia("(max-width: 480px)").matches;
 
 export default function NewsScraperCard({ s3JsonUrl, onContentReady }) {
   const [chartData, setChartData] = useState(null);
   const [error, setError] = useState(null);
+  const [isNarrow, setIsNarrow] = useState(window.innerWidth < 600);
 
   useEffect(() => {
     if (!s3JsonUrl) return;
 
+    let isMounted = true;
+
+    // --- Responsive width logic ---
+    const updateWidth = () => {
+      setIsNarrow(window.innerWidth < 600);
+    };
+
+    // Set immediately on mount
+    updateWidth();
+
+    // Listen for resize / orientation change
+    window.addEventListener("resize", updateWidth);
+
+    // --- Fetch data ---
     fetch(s3JsonUrl, { cache: "no-store" })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error(res.status);
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
+        if (!isMounted) return;
+
         const records = Array.isArray(data)
           ? data
           : data.data || data.records || [];
+
         setChartData(records);
+
+        // Give Plotly + carousel a beat to settle in prod
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            window.dispatchEvent(new Event("resize"));
+          });
+        });
       })
-      .catch(err => {
+      .catch((err) => {
+        if (!isMounted) return;
         console.error("JSON fetch failed:", err);
         setError("Network error while loading chart data");
       });
+
+    // --- Cleanup ---
+    return () => {
+      isMounted = false;
+      window.removeEventListener("resize", updateWidth);
+    };
   }, [s3JsonUrl]);
 
   if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -39,58 +72,74 @@ export default function NewsScraperCard({ s3JsonUrl, onContentReady }) {
 
   return (
     <div className="news-scraper-card">
-      <Plot
-        data={[
-          {
-            x,
-            y,
-            type: "bar",
-            text: y,
-            marker: {
-              color: "#3f3cdaff",        // color of chart bars
-              line: {
-                width: 0,
+      <div className="news-content">
+      <div className="news-plot-wrap">
+          <Plot
+            data={[
+              {
+                x,
+                y,
+                type: "bar",
+                text: y,
+                marker: {
+                  color: "#3f3cdaff",
+                  line: { width: 0 },
+                },
+                hoverinfo: "text",
+                hovertext: hoverText,
               },
-            },
-            hoverinfo: "text",
-            hovertext: hoverText,
-          },
-        ]}
-        layout={{
+            ]}
+            layout={{
+              autosize: true,
+
+              // ✅ Reliable title + subtitle (works in prod)
               title: {
-                text: "Top 10 Most Common Topics Of Bans",
+                text: isNarrow
+                  ? "Top 10 Most Common<br>Topics Of Bans" +
+                    "<br><span style='font-size:11px; color:#cfcfcf'>count of news articles</span>"
+                  : "Top 10 Most Common Topics Of Bans" +
+                    "<br><span style='font-size:12px; color:#cfcfcf'>count of news articles</span>",
                 x: 0.5,
                 xanchor: "center",
                 font: {
-                  size: 18,
-                  color: "#ffffff"
+                  size: isNarrow ? 14 : 18,
+                  color: "#ffffff",
                 },
-                subtitle: {
-                  text: "count of news articles"
-                }
               },
-          height: 400,
-          width: 500,
-          autosize: true,
-          paper_bgcolor: "rgba(88, 94, 100, 0)",
-          plot_bgcolor: "rgba(88, 94, 100, 0)",
-          title_x: 0.5,
-          margin: { t: 50, b: 150 },
-          font: { color: "#ffffff" },
-        }}
-        config={{ responsive: true }}
-        onAfterPlot={() => {
-          // 🔑 THIS is what fixes scrolling
-          if (onContentReady) {
-            onContentReady();
-          }
-        }}
-      />
+              // ✅ Give Plotly enough space for title + bars
+              margin: {
+                t: 75,
+                b: 80,
+                l: 45,
+                r: 20,
+              },
 
-      <p className="indent">First and foremost I want to caution anyone reading this that this is NOT intended to be a source of truth of 
-      what is happening in the world, so much as a hobby study evaluating what is happening in the media landscape. Although I've done no sentiment
+              paper_bgcolor: "rgba(88, 94, 100, 0)",
+              plot_bgcolor: "rgba(88, 94, 100, 0)",
+              font: { color: "#ffffff" },
+            }}
+            config={{
+              responsive: true,
+              displayModeBar: false,
+            }}
+            useResizeHandler
+            style={{ width: "100%", height: "100%" }}
+            onAfterPlot={() => {
+              // ✅ Forces carousel + Plotly to re-measure in prod
+              requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                  window.dispatchEvent(new Event("resize"));
+                  if (onContentReady) onContentReady();
+                });
+              });
+            }}
+          />
+      </div>
+      <div className="news-text">
+      <p className="indent">First and foremost I want to clarify that this was never intended to be a source of objective truth for current events
+        or anything of that nature. Plain and simple, this is a hobby study evaluating what is happening in the media landscape. Although I've done no sentiment
       analysis, there is still bias baked into what various publications decide to write about, and all of those should be considered when viewing
-      this data.</p>
+      this data. Many true things can be inferred from the data presented, but context and methodology should always be taken into consideration.</p>
       <p className="indent">
       This started out as a relatively simple project in concept, but spanned many new and interesting fields of tech to pull off.<br/>
       The idea is simple, find some easily scrape-able and often updated news source, and do some basic analysis. Also, figure out
@@ -135,5 +184,7 @@ export default function NewsScraperCard({ s3JsonUrl, onContentReady }) {
       or web scraping, and improve my text parsing logic just to name a few things!
       </p>
     </div>
+  </div>
+</div>
   );
 }

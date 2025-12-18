@@ -64,7 +64,51 @@ body {
   text-align: center; /* Center only the heading */
 }
 
-  /* Mobile optimization */
+/* ================================
+   News Scraper Card Layout Fix
+   ================================ */
+
+.news-scraper-card {
+  width: 100%;
+}
+
+/* Forces chart + text to stack vertically */
+.news-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chart must participate in normal flow */
+.news-plot-wrap {
+  position: relative;   /* CRITICAL */
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Chart sizing */
+.news-plot-wrap {
+  height: clamp(320px, 42svh, 520px);
+  max-width: 900px;
+  margin: 0 auto 16px auto;
+}
+
+/* Ensure Plotly fills wrapper */
+.news-plot-wrap .js-plotly-plot,
+.news-plot-wrap .plot-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Text must render below chart */
+.news-text {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ================================
+   Mobile Optimization
+   ================================ */
   @media (max-width: 768px) {
 .FirstProject {
   width: 80%; /* Reduce content width on mobile devices */
