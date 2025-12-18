@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.b3b4342b.css",
-    "main.js": "/static/js/main.a36bfa59.js",
+    "main.js": "/static/js/main.7c2d858c.js",
     "static/js/453.903d23b1.chunk.js": "/static/js/453.903d23b1.chunk.js",
     "static/media/lo-fi-cozy-room-wallpaper - 02.jpg": "/static/media/lo-fi-cozy-room-wallpaper - 02.6364cb4db74bd4c9a5c5.jpg",
     "static/media/anime-style-cozy-home-interior.jpg": "/static/media/anime-style-cozy-home-interior.85065d8428a878bdd4fa.jpg",
@@ -11,11 +11,11 @@
     "static/media/MOTD-login-custom.png": "/static/media/MOTD-login-custom.1e2c11669a4650cfdec3.png",
     "index.html": "/index.html",
     "main.b3b4342b.css.map": "/static/css/main.b3b4342b.css.map",
-    "main.a36bfa59.js.map": "/static/js/main.a36bfa59.js.map",
+    "main.7c2d858c.js.map": "/static/js/main.7c2d858c.js.map",
     "453.903d23b1.chunk.js.map": "/static/js/453.903d23b1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b3b4342b.css",
-    "static/js/main.a36bfa59.js"
+    "static/js/main.7c2d858c.js"
   ]
 }

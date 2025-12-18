@@ -63,6 +63,17 @@ export default function ProjectCarousel({ projects, parentRef, carouselRef, s3Js
       });
     });
   };
+  // update scroll height
+  const updateHeight = () => {
+  const swiper = swiperRef.current?.swiper;
+  if (!swiper) return;
+
+  requestAnimationFrame(() => {
+    swiper.updateAutoHeight(0);
+    swiper.update();
+  });
+};
+
 
   return (
     <div className="carousel-container">
@@ -102,7 +113,7 @@ export default function ProjectCarousel({ projects, parentRef, carouselRef, s3Js
                 <div className="project-card">
                   <h2 className="project-title">{proj.title}</h2>
                   <div className="card-scrollable-content">
-                    <Component s3JsonUrl={proj.title === "News Scraper" ? s3JsonUrl : undefined} />
+                    <Component s3JsonUrl={proj.title === "News Scraper" ? s3JsonUrl : undefined} onContentReady={updateHeight}/>
                   </div>
                 </div>
               </div>

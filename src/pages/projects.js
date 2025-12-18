@@ -27,11 +27,19 @@ export default function Projects() {
     <div className="Projects">
       <div className="FirstProject" ref={firstProjectRef}>
         <h1>Projects</h1>
-        <p>Projects page is currently undergoing a large overhaul...</p>
-
-        <div className="graph-container">
-          <CovidGraphic />
-        </div>
+        <p className='indent'>
+          This page is dedicated to various personal projects I've taken to in order to 
+          expand my knowledge and capabilities, but most importantly just to keep challenging
+          myself and see how far I can take this hobby of mine!</p>
+          <p className='indent'>
+          First and foremost this entire website should be taken as a personal project. It has been 
+          both immensely challenging and immensely rewarding; serving as a practical use case for me to
+          start delving into javascript, linux, and webdev.
+          Particularly nesting the project cards below and polishing up the scroll behavior between one card 
+          and the next proved to be an especially challenging and rewarding task. Automation is fun but a smooth
+          user experience makes it easier for everyone to appreciate, especially if the less asthetic backend stuff
+          doesn't grab you as much.
+        </p>
 
         <div style={{ marginTop: "30px" }} ref={carouselRef}>
         <ProjectCarousel
