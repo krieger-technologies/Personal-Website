@@ -1,30 +1,72 @@
-export default function NewsScraperCard() {
+import { useState, useEffect } from "react";
+import Plot from "react-plotly.js";
+
+export default function NewsScraperCard({ s3JsonUrl }) {
+  const [chartData, setChartData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!s3JsonUrl) return;
+
+    fetch(s3JsonUrl, { cache: "no-store" })
+      .then(res => {
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+      })
+      .then(data => {
+        const records = Array.isArray(data)
+          ? data
+          : data.data || data.records || [];
+
+        setChartData(records);
+      })
+      .catch(err => {
+        console.error("JSON fetch failed:", err);
+        setError("Network error while loading chart data");
+      });
+  }, [s3JsonUrl]);
+
+  if (error) {
+    return <p style={{ color: "red" }}>{error}</p>;
+  }
+
+  if (!Array.isArray(chartData)) {
+    return <p>Loading chart…</p>;
+  }
+
+  if (chartData.length === 0) {
+    return <p>No news data available.</p>;
+  }
+
+  const x = chartData.map(d => d.target);
+  const y = chartData.map(d => d.count_of_news_articles || 0);
+  const hoverText = chartData.map(
+    d =>
+      `Datasources: ${d.datasources || "N/A"}<br>` +
+      `States: ${d.states || "N/A"}<br>` +
+      `Count: ${d.count_of_news_articles || 0}`
+  );
+
   return (
-    <>
-      <p>
-        <p className="indent">
-        I am currently trying to move a local ETL pipeline I wrote in python onto my AWS instance to run live and provide automated and up-to-date
-        graphics and data to my website, however I ran into some size restrictions in the lambda/layers environment so I am currently exploring
-        some creative solutions on how to work around this.
-        </p>
-
-        <p className="indent">
-        News headlines are scrapped from Google into a catch-all mailbox. I then have a python script to perform text analysis to 
-        detemrine the source, subject, and location if applicable. Output to display various graphics and filters to drill down to various levels
-        of granularity.
-        </p>
-        <br/>
-        <strong>[Lorem Ipsum to test dynamic functionality with carousel cards.]</strong><br/>
-        Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
-
-Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
-
-Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
-
-Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
-
-Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
-      </p>
-    </>
+    <div className="news-scraper-card">
+      <Plot
+        data={[{
+          x,
+          y,
+          type: "bar",
+          text: y,
+          hoverinfo: "text",
+          hovertext: hoverText,
+        }]}
+        layout={{
+          title: "Top 15 News Topics",
+          height: 600,
+          autosize: true,
+          title_x: 0.5,
+          margin: { t: 50, b: 150 },
+        }}
+        config={{ responsive: true }}
+      />
+    </div>
   );
 }
