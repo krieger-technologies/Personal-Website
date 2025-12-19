@@ -1,25 +1,37 @@
 import '../styles/projects.css';
-import CovidGraphic from '../charts/covid.js';
 import ProjectCarousel from '../components/ProjectCarousel';
 import NewsScraperCard from '../components/cards/NewsScraper';
 import HomeLabCard from '../components/cards/HomeLab';
+import NewsScraperExplanation from '../components/cards/NewsScraperExplanation';
 import { useRef, useState, useEffect } from 'react';
 
 export default function Projects() {
   const projectData = [
     { title: "News Scraper", component: NewsScraperCard },
+    { title: "News Scraper - Methodology", component:NewsScraperExplanation},
     { title: "Home Lab Setup", component: HomeLabCard }
   ];
 
   const firstProjectRef = useRef(null);
   const carouselRef = useRef(null);
 
-  // --- Step 1: fetch latest pre-signed URL ---
-  const [s3JsonUrl, setS3JsonUrl] = useState(null);
+  // --- Step 1: fetch latest URL ---
+  const [newsSummaryBarChartUrl, setNewsSummaryBarChartUrl] = useState(null);
+  const [newsDetailTableUrl, setNewsDetailTableUrl] = useState(null);
+
 
   useEffect(() => {
-    setS3JsonUrl(
-      "https://d25vlaal36g4hr.cloudfront.net/news_data/public_news_data.json"
+    setNewsSummaryBarChartUrl(
+      process.env.NODE_ENV === "development"
+        ? "https://krieger-technologies.com/news_data/public_news_data_bar_chart.json"
+        : "/news_data/public_news_data_bar_chart.json"
+    );
+
+
+    setNewsDetailTableUrl(
+      process.env.NODE_ENV === "development"
+        ? "https://krieger-technologies.com/news_data/public_news_detail_table.json"
+        : "/news_data/public_news_detail_table.json"
     );
   }, []);
 
@@ -46,7 +58,8 @@ export default function Projects() {
           projects={projectData}
           parentRef={firstProjectRef}
           carouselRef={carouselRef}
-          s3JsonUrl={s3JsonUrl}
+          newsSummaryBarChartUrl={newsSummaryBarChartUrl}
+          newsDetailTableUrl={newsDetailTableUrl}
         />
         </div>
       </div>

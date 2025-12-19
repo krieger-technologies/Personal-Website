@@ -7,7 +7,13 @@ import "swiper/css/navigation";
 import { useRef } from "react";
 import "../styles/project-carousel.css";
 
-export default function ProjectCarousel({ projects, parentRef, carouselRef, s3JsonUrl }) {
+export default function ProjectCarousel({
+  projects,
+  parentRef,
+  carouselRef,
+  newsSummaryBarChartUrl,
+  newsDetailTableUrl,
+}) {
   const swiperRef = useRef(null);
 
   const syncTopPagination = (swiper) => {
@@ -113,7 +119,15 @@ export default function ProjectCarousel({ projects, parentRef, carouselRef, s3Js
                 <div className="project-card">
                   <h2 className="project-title">{proj.title}</h2>
                   <div className="card-scrollable-content">
-                    <Component s3JsonUrl={proj.title === "News Scraper" ? s3JsonUrl : undefined} onContentReady={updateHeight}/>
+                    <Component
+                        newsSummaryBarChartUrl={
+                          proj.title === "News Scraper" ? newsSummaryBarChartUrl : undefined
+                        }
+                        newsDetailTableUrl={
+                          proj.title === "News Scraper" ? newsDetailTableUrl : undefined
+                        }
+                        onContentReady={updateHeight}
+                      />
                   </div>
                 </div>
               </div>

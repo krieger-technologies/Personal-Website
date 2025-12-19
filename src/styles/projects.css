@@ -105,6 +105,82 @@ body {
   z-index: 1;
 }
 
+.news-detail-table {
+  margin-top: 16px;
+  position: relative; /* required for overlay */
+
+  /* Size + containment */
+  max-height: 320px;
+  overflow: auto;
+
+  /* 🔑 Background tuning */
+  background: rgba(0, 0, 0, 0.5); /* darker + less transparent */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  /* Framing */
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+
+  /* Subtle depth */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+/* Freeze detail table headers so always visible
+      with blur effect for text behind it      */
+.news-detail-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
+  /* 🔑 Glass surface */
+  background: rgba(18, 20, 26, 0.92);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  /* Text clarity */
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  padding: 9px 10px;
+  text-align: left;
+
+  /* Separation */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+/* extra column spacing for neater layout */
+.news-detail-table th,
+.news-detail-table td {
+  padding: 8px 14px; /* ⬅️ more horizontal space */
+}
+.news-detail-table table {
+  width: max-content;   /* 🔑 allows table to exceed container width */
+  min-width: 100%;      /* still fills container when possible */
+  border-collapse: collapse;
+
+  font-size: 12.5px;
+  color: #f1f1f1;
+}
+.news-detail-table td:last-child {
+  white-space: nowrap;       /* 🔑 allows horizontal scroll */
+  padding-right: 16px;
+}
+.news-detail-table {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.35) transparent;
+}
+
+.news-detail-table::-webkit-scrollbar {
+  height: 6px;
+}
+
+.news-detail-table::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.35);
+  border-radius: 4px;
+}
+
 
 /* ================================
    Mobile Optimization
