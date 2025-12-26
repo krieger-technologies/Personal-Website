@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 
-// console.log("summary:", newsSummaryBarChart);
-// console.log("detail:", newsDetailTableUrl);
-
 export default function NewsScraperCard({
   newsSummaryBarChartUrl,
   newsDetailTableUrl,
