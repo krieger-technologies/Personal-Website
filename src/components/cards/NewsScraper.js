@@ -109,6 +109,7 @@ export default function NewsScraperCard({
     <div className="news-scraper-card">
       <div className="news-content">
       <div className="news-plot-wrap">
+        <div className="plot-scroll-overlay" />
           <Plot
             data={[
               {
@@ -148,6 +149,12 @@ export default function NewsScraperCard({
                 l: 45,
                 r: 20,
               },
+                xaxis: {
+                  fixedrange: true
+                },
+                yaxis: {
+                  fixedrange: true
+                },
 
               paper_bgcolor: "rgba(88, 94, 100, 0)",
               plot_bgcolor: "rgba(88, 94, 100, 0)",
@@ -156,6 +163,8 @@ export default function NewsScraperCard({
             config={{
               responsive: true,
               displayModeBar: false,
+              scrollZoom: false, // disable scroll zoom
+              doubleClick: false // disable zoom
             }}
             useResizeHandler
             style={{ width: "100%", height: "100%" }}

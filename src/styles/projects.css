@@ -98,6 +98,38 @@ body {
   width: 100% !important;
   height: 100% !important;
 }
+/* allow users to scroll card with chart */
+/* ====================================== */
+.news-plot-wrap .js-plotly-plot {
+  touch-action: pan-y;
+}
+
+/* Allow scrolling through Plotly charts */
+.news-plot-wrap .draglayer,
+.news-plot-wrap .nsewdrag {
+  pointer-events: none;
+}
+.news-plot-wrap {
+  position: relative;
+}
+
+/* Invisible layer that handles scrolling */
+.plot-scroll-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: transparent;
+
+  /* Allow vertical scrolling */
+  touch-action: pan-y;
+}
+
+/* Plotly stays interactive underneath */
+.news-plot-wrap .js-plotly-plot {
+  position: relative;
+  z-index: 1;
+}
+/* ================================================ */
 
 /* Text must render below chart */
 .news-text {
@@ -197,3 +229,9 @@ body {
   padding-bottom: 20px;
     }
   }
+/* enable scrolling over bar chart */
+  @media (max-width: 768px) {
+  .plot-scroll-overlay {
+    pointer-events: auto;
+  }
+}
