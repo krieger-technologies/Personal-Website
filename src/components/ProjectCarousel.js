@@ -13,6 +13,7 @@ export default function ProjectCarousel({
   carouselRef,
   newsSummaryBarChartUrl,
   newsDetailTableUrl,
+  newsMetadataUrl,
 }) {
   const swiperRef = useRef(null);
 
@@ -125,6 +126,9 @@ export default function ProjectCarousel({
                         }
                         newsDetailTableUrl={
                           proj.title === "News Scraper" ? newsDetailTableUrl : undefined
+                        }
+                        metadataUrl={
+                          proj.title === "News Scraper" ? newsMetadataUrl : undefined
                         }
                         onContentReady={updateHeight}
                       />

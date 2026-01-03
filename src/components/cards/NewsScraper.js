@@ -4,6 +4,7 @@ import Plot from "react-plotly.js";
 export default function NewsScraperCard({
   newsSummaryBarChartUrl,
   newsDetailTableUrl,
+  metadataUrl,
   onContentReady
 })
 
@@ -12,6 +13,7 @@ export default function NewsScraperCard({
   const [error, setError] = useState(null);
   const [isNarrow, setIsNarrow] = useState(window.innerWidth < 600);
   const [detailData, setDetailData] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
     console.log("NewsScraperCard render", {
     newsSummaryBarChartUrl,
@@ -82,13 +84,28 @@ export default function NewsScraperCard({
         if (!isMounted) return;
         console.error("Detail JSON fetch failed:", err);
       });
-
     // --- Cleanup ---
     return () => {
       isMounted = false;
       window.removeEventListener("resize", updateWidth);
     };
   }, [newsSummaryBarChartUrl, newsDetailTableUrl]);
+    // FETCH LAST SCRIPT RUNTIME
+    useEffect(() => {
+      if (!metadataUrl) return;
+
+      fetch(metadataUrl, { cache: "no-store" })
+        .then(res => {
+          if (!res.ok) throw new Error(res.status);
+          return res.json();
+        })
+        .then(meta => {
+          setLastUpdated(meta.last_updated_utc);
+        })
+        .catch(err => {
+          console.error("Metadata fetch failed:", err);
+        });
+    }, [metadataUrl]);
 
   if (error) return <p style={{ color: "red" }}>{error}</p>;
   if (!Array.isArray(chartData)) return <p>Loading chart…</p>;
@@ -107,6 +124,16 @@ export default function NewsScraperCard({
       <div className="news-content">
       <div className="news-plot-wrap">
         <div className="plot-scroll-overlay" />
+        {/* DISPLAY LAST RUN TIMESTAMP */}
+          {lastUpdated && (
+            <div className="news-last-updated">
+              Last updated:{" "}
+              {new Date(lastUpdated).toLocaleString(undefined, {
+                dateStyle: "medium",
+                timeStyle: "short",
+              })}
+            </div>
+          )}
           <Plot
             data={[
               {
@@ -183,17 +210,37 @@ export default function NewsScraperCard({
                     <th>Date</th>
                     <th>State</th>
                     <th>Topic</th>
+                    <th>Source</th>
                     <th>Headline</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {detailData.slice(0, 50).map((row, idx) => (
+                  {detailData.sort((a, b) => {
+                    // sort table by date
+                    const da = new Date(a.alert_date);
+                    const db = new Date(b.alert_date);
+
+                    // Push invalid or missing dates to the bottom
+                    if (isNaN(da)) return 1;
+                    if (isNaN(db)) return -1;
+
+                    return db - da;
+                  })
+                      // 🔢 Pagination (adjust number as needed)
+                  .slice(0, 100)
+                  .map((row, idx) => (
                     <tr key={idx}>
-                      <td>{new Date(row.alert_date).toLocaleDateString()}</td>
-                      <td>{row.state}</td>
-                      <td>{row.target || "—"}</td>
                       <td>
-                        {row.article_links?.startsWith("http") ? (
+                        {row.alert_date
+                          ? new Date(row.alert_date).toLocaleDateString()
+                          : "—"}
+                      </td>
+                      <td>{row.state || "—"}</td>
+                      <td>{row.target || "—"}</td>
+                      <td>{row.datasource || "—"}</td>
+                      <td>
+                        {typeof row.article_links === "string" &&
+                        row.article_links.startsWith("http") ? (
                           <a
                             href={row.article_links}
                             target="_blank"
@@ -202,7 +249,7 @@ export default function NewsScraperCard({
                             {row.headlines}
                           </a>
                         ) : (
-                          row.headlines
+                          row.headlines || "—"
                         )}
                       </td>
                     </tr>

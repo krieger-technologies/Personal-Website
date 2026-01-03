@@ -2,18 +2,20 @@ export default function NewsScraperExplanation() {
   return (
     <div className="news-explanation-card">
         <div className="news-text">
-        <p className="indent">First and foremost I want to clarify that this was never intended to be a source of objective truth for current events
-            or anything of that nature. Plain and simple, this is a hobby study evaluating what is happening in the media landscape. Although I've done no sentiment
-        analysis, there is still bias baked into what various publications decide to write about, and all of those should be considered when viewing
-        this data. Many true things can be inferred from the data presented, but context and methodology should always be taken into consideration.</p>
+        <p className="indent">For context in how I approached this project, this is a hobby study evaluating what is happening in the world through the lens of the media landscape (this
+            last part is important). Like many people these days, I often feel overwhelmed with looking into the news or opening social media and being burried under an avalanche of 
+            emotionally charged headlines and commentary. I simply wanted to see if I could find a way to programmatically aggregate and organize these volumes of data that are 
+            shoveled at us every day and return some basic and useful analysis to display on my website. Parsing out objective truth from individual articles is a much more difficult, 
+            especially via automation. I think I can safely say that there is a grain of truth in each of my articles, but each publication and author has their own natural biases
+            baked in, and should be interperated as such. However if we stay above the individual details and only look and evaluate from a high level, we can still make some interesting
+            and truthful conclusions.</p>
         <p className="indent">
         This started out as a relatively simple project in concept, but spanned many new and interesting fields of tech to pull off.<br/>
-        The idea is simple, find some easily scrape-able and often updated news source, and do some basic analysis. Also, figure out
-        how to update it automatically and host it on my website. Here is what I have put together and some details about the trials and tribulations 
-        I faced in the process.</p>
+        The idea is simple, find some easily scrape-able and often updated news source, and do some basic analysis. My stretch goal was to fully automate it and
+        make it a living process anyone with internet access can view. Here are some of the trials and tribulations I've faced;</p>
         <p>
         <ul>
-            <li>I set up an automated google alert in a project email address to notify me of any US based news articles that mention the word "ban".
+            <li>Set up an automated google alert in a throw-away email address to notify me of any US based news articles that mention the word "ban".
             This was by far the easiest part. Perhaps in some future iteration I will attempt to set up my own internet crawling script. But for now this
             gets the job done.</li><br/>
             <li>I then wrote a local python script to scrape out these email alerts, parse out the interesting and useful data, organize it into a dataframe, 
