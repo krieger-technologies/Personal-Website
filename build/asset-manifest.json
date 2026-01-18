@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.90331824.css",
-    "main.js": "/static/js/main.ce0d3a8a.js",
+    "main.css": "/static/css/main.bc9b55c2.css",
+    "main.js": "/static/js/main.4bf01fd7.js",
     "static/js/453.903d23b1.chunk.js": "/static/js/453.903d23b1.chunk.js",
     "static/media/lo-fi-cozy-room-wallpaper-02.jpg": "/static/media/lo-fi-cozy-room-wallpaper-02.6364cb4db74bd4c9a5c5.jpg",
     "static/media/anime-style-cozy-home-interior.jpg": "/static/media/anime-style-cozy-home-interior.85065d8428a878bdd4fa.jpg",
@@ -10,12 +10,12 @@
     "static/media/analytics-02.jpg": "/static/media/analytics-02.aa85036e771be5e0514d.jpg",
     "static/media/MOTD-login-custom.png": "/static/media/MOTD-login-custom.1e2c11669a4650cfdec3.png",
     "index.html": "/index.html",
-    "main.90331824.css.map": "/static/css/main.90331824.css.map",
-    "main.ce0d3a8a.js.map": "/static/js/main.ce0d3a8a.js.map",
+    "main.bc9b55c2.css.map": "/static/css/main.bc9b55c2.css.map",
+    "main.4bf01fd7.js.map": "/static/js/main.4bf01fd7.js.map",
     "453.903d23b1.chunk.js.map": "/static/js/453.903d23b1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.90331824.css",
-    "static/js/main.ce0d3a8a.js"
+    "static/css/main.bc9b55c2.css",
+    "static/js/main.4bf01fd7.js"
   ]
 }

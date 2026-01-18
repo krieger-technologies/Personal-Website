@@ -140,6 +140,13 @@ body {
 .news-detail-table {
   margin-top: 16px;
   position: relative; /* required for overlay */
+  overflow-x: auto;
+  overflow-y: auto;
+  max-width: 100%;
+  /* prevent swipe chaining into carousel (glitching behavior between horizontal table scroll and card change */
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+  -webkit-oevrflow-scrolling: touch;
 
   /* Size + containment */
   max-height: 320px;

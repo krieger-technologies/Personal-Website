@@ -92,6 +92,8 @@ export default function ProjectCarousel({
         slidesPerView={1}
         autoHeight={true}
         speed={150}
+        noSwiping={true}
+        noSwipingClass="news-detail-table"
         pagination={{
           clickable: true,
           el: ".swiper-pagination-bottom",
