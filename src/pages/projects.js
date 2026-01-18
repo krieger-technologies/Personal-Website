@@ -4,6 +4,7 @@ import NewsScraperCard from '../components/cards/NewsScraper';
 import HomeLabCard from '../components/cards/HomeLab';
 import NewsScraperExplanation from '../components/cards/NewsScraperExplanation';
 import { useRef, useState, useEffect } from 'react';
+// junk comment for testing git and gitignore stuff
 
 export default function Projects() {
   const projectData = [
