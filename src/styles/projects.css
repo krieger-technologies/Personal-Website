@@ -64,7 +64,166 @@ body {
   text-align: center; /* Center only the heading */
 }
 
-  /* Mobile optimization */
+/* ================================
+   News Scraper Card Layout Fix
+   ================================ */
+
+.news-scraper-card {
+  width: 100%;
+}
+
+/* Forces chart + text to stack vertically */
+.news-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chart must participate in normal flow */
+.news-plot-wrap {
+  position: relative;   /* CRITICAL */
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Chart sizing */
+.news-plot-wrap {
+  height: clamp(320px, 42svh, 520px);
+  max-width: 900px;
+  margin: 0 auto 16px auto;
+}
+
+/* Ensure Plotly fills wrapper */
+.news-plot-wrap .js-plotly-plot,
+.news-plot-wrap .plot-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+/* allow users to scroll card with chart */
+/* ====================================== */
+.news-plot-wrap .js-plotly-plot {
+  touch-action: pan-y;
+}
+
+/* Allow scrolling through Plotly charts */
+.news-plot-wrap .draglayer,
+.news-plot-wrap .nsewdrag {
+  pointer-events: none;
+}
+.news-plot-wrap {
+  position: relative;
+}
+
+/* Invisible layer that handles scrolling */
+.plot-scroll-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: transparent;
+
+  /* Allow vertical scrolling */
+  touch-action: pan-y;
+}
+
+/* Plotly stays interactive underneath */
+.news-plot-wrap .js-plotly-plot {
+  position: relative;
+  z-index: 1;
+}
+/* ================================================ */
+
+/* Text must render below chart */
+.news-text {
+  position: relative;
+  z-index: 1;
+}
+
+.news-detail-table {
+  margin-top: 16px;
+  position: relative; /* required for overlay */
+  overflow-x: auto;
+  overflow-y: auto;
+  max-width: 100%;
+  /* prevent swipe chaining into carousel (glitching behavior between horizontal table scroll and card change */
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+  -webkit-oevrflow-scrolling: touch;
+
+  /* Size + containment */
+  max-height: 320px;
+  overflow: auto;
+
+  /* 🔑 Background tuning */
+  background: rgba(0, 0, 0, 0.5); /* darker + less transparent */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  /* Framing */
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+
+  /* Subtle depth */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+/* Freeze detail table headers so always visible
+      with blur effect for text behind it      */
+.news-detail-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
+  /* 🔑 Glass surface */
+  background: rgba(18, 20, 26, 0.92);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  /* Text clarity */
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  padding: 9px 10px;
+  text-align: left;
+
+  /* Separation */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+/* extra column spacing for neater layout */
+.news-detail-table th,
+.news-detail-table td {
+  padding: 8px 14px; /* ⬅️ more horizontal space */
+}
+.news-detail-table table {
+  width: max-content;   /* 🔑 allows table to exceed container width */
+  min-width: 100%;      /* still fills container when possible */
+  border-collapse: collapse;
+
+  font-size: 12.5px;
+  color: #f1f1f1;
+}
+.news-detail-table td:last-child {
+  white-space: nowrap;       /* 🔑 allows horizontal scroll */
+  padding-right: 16px;
+}
+.news-detail-table {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.35) transparent;
+}
+
+.news-detail-table::-webkit-scrollbar {
+  height: 6px;
+}
+
+.news-detail-table::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.35);
+  border-radius: 4px;
+}
+
+
+/* ================================
+   Mobile Optimization
+   ================================ */
   @media (max-width: 768px) {
 .FirstProject {
   width: 80%; /* Reduce content width on mobile devices */
@@ -77,3 +236,9 @@ body {
   padding-bottom: 20px;
     }
   }
+/* enable scrolling over bar chart */
+  @media (max-width: 768px) {
+  .plot-scroll-overlay {
+    pointer-events: auto;
+  }
+}
