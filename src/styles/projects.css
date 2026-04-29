@@ -220,6 +220,19 @@ body {
   border-radius: 4px;
 }
 
+.plot-scroll-overlay {
+  pointer-events: none;
+}
+/* Make sure the filter UI sits ABOVE any overlays/layers */
+.news-filters,
+.news-filter-stats,
+.news-view-toggle,
+.news-chart-tabs {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
 
 /* ================================
    Mobile Optimization
@@ -241,4 +254,36 @@ body {
   .plot-scroll-overlay {
     pointer-events: auto;
   }
+}
+
+/* ================================
+   Chart View Tab Switcher
+   ================================ */
+.news-chart-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 10;
+}
+
+.news-tab-btn {
+  padding: 6px 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.news-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.news-tab-btn.active {
+  background: #3f3cdaff;
+  border-color: #3f3cdaff;
+  font-weight: 600;
 }
