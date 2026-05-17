@@ -1,55 +1,210 @@
+import '../../styles/NewsScraperExplanation.css';
 export default function NewsScraperExplanation() {
   return (
     <div className="news-explanation-card">
-        <div className="news-text">
-        <p className="indent">For context in how I approached this project, this is a hobby study evaluating what is happening in the world through the lens of the media landscape (this
-            last part is important). Like many people these days, I often feel overwhelmed with looking into the news or opening social media and being burried under an avalanche of 
-            emotionally charged headlines and commentary. I simply wanted to see if I could find a way to programmatically aggregate and organize these volumes of data that are 
-            shoveled at us every day and return some basic and useful analysis to display on my website. Parsing out objective truth from individual articles is a much more difficult, 
-            especially via automation. I think I can safely say that there is a grain of truth in each of my articles, but each publication and author has their own natural biases
-            baked in, and should be interperated as such. However if we stay above the individual details and only look and evaluate from a high level, we can still make some interesting
-            and truthful conclusions.</p>
+      <div className="news-text">
+
+        {/* ── INFOGRAPHIC ── */}
+        <div className="pipeline-card">
+
+          <div className="pipeline-card__topper" />
+
+          <div className="pipeline-card__header">
+            <div className="pipeline-eyebrow">Pipeline Overview</div>
+            <h2 className="pipeline-title">News Scraper — ETL Architecture</h2>
+            <p className="pipeline-subtitle">
+              End-to-end pipeline scraping Google Alert emails to classify U.S. legislative
+              ban headlines by state and topic, publishing live data to a React frontend.
+            </p>
+          </div>
+
+          <div className="pipeline-steps">
+
+            <div className="pipeline-step">
+              <div className="pipeline-spine">
+                <div className="pipeline-node pipeline-node--blue">01</div>
+                <div className="pipeline-connector" />
+              </div>
+              <div className="pipeline-body">
+                <div className="pipeline-label pipeline-label--blue">Ingest</div>
+                <div className="pipeline-step-title">Google Alerts via Gmail API</div>
+                <div className="pipeline-step-desc">
+                  A Google Alert monitors the web for "ban" headlines and delivers results
+                  by email. The Gmail API paginates through 500+ messages per run using
+                  OAuth2 credentials.
+                </div>
+                <div className="pipeline-tags">
+                  <span className="pipeline-tag pipeline-tag--blue">Gmail API</span>
+                  <span className="pipeline-tag pipeline-tag--blue">Google Alerts</span>
+                  <span className="pipeline-tag pipeline-tag--blue">OAuth2</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pipeline-step">
+              <div className="pipeline-spine">
+                <div className="pipeline-node pipeline-node--blue">02</div>
+                <div className="pipeline-connector" />
+              </div>
+              <div className="pipeline-body">
+                <div className="pipeline-label pipeline-label--blue">Parse</div>
+                <div className="pipeline-step-title">Email Parsing & Link Extraction</div>
+                <div className="pipeline-step-desc">
+                  Emails are Base64-decoded, split into article blocks, and parsed for
+                  headline text and URLs. Google redirect wrappers are unwrapped to recover
+                  original source links.
+                </div>
+                <div className="pipeline-tags">
+                  <span className="pipeline-tag pipeline-tag--blue">base64</span>
+                  <span className="pipeline-tag pipeline-tag--blue">regex</span>
+                  <span className="pipeline-tag pipeline-tag--blue">urllib</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pipeline-step">
+              <div className="pipeline-spine">
+                <div className="pipeline-node pipeline-node--green">03</div>
+                <div className="pipeline-connector" />
+              </div>
+              <div className="pipeline-body">
+                <div className="pipeline-label pipeline-label--green">Classify</div>
+                <div className="pipeline-step-title">State & Geography Detection</div>
+                <div className="pipeline-step-desc">
+                  Headlines are matched against a custom regex dictionary covering all 50
+                  states — including abbreviations, cities, and political figures
+                  (e.g. Newsom → California). Unmatched articles are tagged National / Unknown.
+                </div>
+                <div className="pipeline-tags">
+                  <span className="pipeline-tag pipeline-tag--green">regex</span>
+                  <span className="pipeline-tag pipeline-tag--green">50 states + D.C.</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pipeline-step">
+              <div className="pipeline-spine">
+                <div className="pipeline-node pipeline-node--green">04</div>
+                <div className="pipeline-connector" />
+              </div>
+              <div className="pipeline-body">
+                <div className="pipeline-label pipeline-label--green">Classify</div>
+                <div className="pipeline-step-title">Topic & Keyword Tagging</div>
+                <div className="pipeline-step-desc">
+                  After NLTK stopword removal, headlines are matched against a
+                  priority-ordered library of 50+ topics (cannabis, AI, guns, voting, and
+                  more). Up to 3 tags per headline, with a regex fallback for unknowns.
+                </div>
+                <div className="pipeline-tags">
+                  <span className="pipeline-tag pipeline-tag--green">NLTK</span>
+                  <span className="pipeline-tag pipeline-tag--green">50+ topics</span>
+                  <span className="pipeline-tag pipeline-tag--green">priority matching</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pipeline-step">
+              <div className="pipeline-spine">
+                <div className="pipeline-node pipeline-node--orange">05</div>
+                <div className="pipeline-connector" />
+              </div>
+              <div className="pipeline-body">
+                <div className="pipeline-label pipeline-label--orange">Transform</div>
+                <div className="pipeline-step-title">Deduplication & Aggregation</div>
+                <div className="pipeline-step-desc">
+                  Data is loaded into a Pandas DataFrame. Duplicate URLs and malformed
+                  records are dropped, dates normalized to ISO 8601 UTC, and two output
+                  datasets are built — a row-level detail table and a top-10 summary.
+                </div>
+                <div className="pipeline-tags">
+                  <span className="pipeline-tag pipeline-tag--orange">pandas</span>
+                  <span className="pipeline-tag pipeline-tag--orange">deduplication</span>
+                  <span className="pipeline-tag pipeline-tag--orange">ISO 8601</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pipeline-step pipeline-step--last">
+              <div className="pipeline-spine">
+                <div className="pipeline-node pipeline-node--orange">06</div>
+                <div className="pipeline-connector" />
+              </div>
+              <div className="pipeline-body">
+                <div className="pipeline-label pipeline-label--orange">Load</div>
+                <div className="pipeline-step-title">Publish to S3 → React Frontend</div>
+                <div className="pipeline-step-desc">
+                  Three JSON files — detail table, bar chart summary, and run timestamp —
+                  are written to S3 via boto3. The React frontend fetches these on load and
+                  renders live infographics with no database required.
+                </div>
+                <div className="pipeline-tags">
+                  <span className="pipeline-tag pipeline-tag--orange">AWS S3</span>
+                  <span className="pipeline-tag pipeline-tag--orange">boto3</span>
+                  <span className="pipeline-tag pipeline-tag--orange">React</span>
+                </div>
+              </div>
+            </div>
+
+          </div>{/* end pipeline-steps */}
+
+          <div className="pipeline-divider"><span>Infrastructure</span></div>
+
+          <div className="pipeline-infra">
+            <div className="pipeline-infra-item">
+              <div className="pipeline-infra-icon">🖥️</div>
+              <div className="pipeline-infra-lbl">Compute</div>
+              <div className="pipeline-infra-val">AWS EC2 Amazon Linux 2023</div>
+            </div>
+            <div className="pipeline-infra-item">
+              <div className="pipeline-infra-icon">⏱️</div>
+              <div className="pipeline-infra-lbl">Scheduling</div>
+              <div className="pipeline-infra-val">Lambda + CloudWatch Cron</div>
+            </div>
+            <div className="pipeline-infra-item">
+              <div className="pipeline-infra-icon">🪣</div>
+              <div className="pipeline-infra-lbl">Storage</div>
+              <div className="pipeline-infra-val">AWS S3 Static Hosting</div>
+            </div>
+          </div>
+
+        </div>{/* end pipeline-card */}
         <p className="indent">
         This started out as a relatively simple project in concept, but spanned many new and interesting fields of tech to pull off.<br/>
         The idea is simple, find some easily scrape-able and often updated news source, and do some basic analysis. My stretch goal was to fully automate it and
         make it a living process anyone with internet access can view. Here are some of the trials and tribulations I've faced;</p>
         <p>
+        <p>
+        <u>A few notes & details about the process:</u>
         <ul>
-            <li>Set up an automated google alert in a throw-away email address to notify me of any US based news articles that mention the word "ban".
-            This was by far the easiest part. Perhaps in some future iteration I will attempt to set up my own internet crawling script. But for now this
-            gets the job done.</li><br/>
-            <li>I then wrote a local python script to scrape out these email alerts, parse out the interesting and useful data, organize it into a dataframe, 
-            categorize it, and plot it via plotly graphics.</li>
-            <ul>
-                <li>This is a slippery and fun challenge to grapple with once you start accumulating some data. Figuring out how to dial in the parsing / regex
-                to be maximally accurate across a wide range of articles and subject is not easy!</li>  
-            </ul><br/>
-            <li>The next step was to figure out how to migrate and host it on AWS and feed it into my website.<br/>
-            I went through several different methods to get this one to work correctly</li>
-            <ul>
-                <li>Firstly I attempted to convert my local python script into a lambda function. However I ran into problems in trying to use pandas in AWS lambda.
-                Since pandas is a pretty large package it does not easily translate. I attempted to find various ways to slim is down with docker or using klayers, but
-                eventually threw my hands up.
-                </li>
-                <li>
-                Next I created an EC2 instance. This was definetly a step closer and got me some good experience setting up an environment to run my python in and writting
-                / converting it with vim/nano and using some linux style programming to set up my directories, store my sensetive information in secure ways, etc. 
-                </li>
-                <li>
-                Next I set up an RDS to write my cleaned up emails and final dataframe into, and set up an API to feed into my website. What I didn't fully realize is that
-                I would need to keep my EC2 instance running 24/7 despite only wanting to run my script once a day/week. Although I set my EC2 up very cheaply, it would still be
-                a waste of money. So I explored more efficient options.
-                </li>
-                <li>
-                And finally, for its current state (at least for the moment), I decided to write my scraping data out to a publicly available JSON in my S3 bucket and read THAT into
-                my website. It loads much faster than my live DB and API and my EC2 only runs when I want to scrape my emails. 
-                </li>
-            </ul>
+            <li>A Google news alert into an email address I setup just for this project seemed like the easiest way to begin aggregating a large volume of real world data.
+                A throwaway email has the benefit of keeping my main personal email address clean and free of clutter. In future iterations it might be interesting to test out some ideas
+                on how to cast a wider net or selectively scrape/avoid specific news sources.
+            </li>
+            <li>The cron job → lambda function → EC2 instance is very useful combination I discovered that enables me to run my data scraping / cleaning script at regular intervals
+                without needing to keep my personal laptop on 24/7 or pay for unecessary resources from AWS. These tools cost me about $4/month.<br/>
+                Staying on top of text parsing is a never ending task, but provides a fun puzzle in how to accurately parse and organize hundreds and thousands of headlines.
+                Maybe in some future iteration I will try my hand at some more advanced analytics on this data.
+            </li>
+            <li>
+                JSON is not an effcient storage format for this type of data repository. I did briefly set up an RDS database and API connection, but quickly shut it down since
+                I didn't want to have to pay for API calls to a live database hosted on AWS. In a future iteration I will switch to parquet file data storage.
+            </li>
+            <li>I also have set up a sort of ETL processing history in my S3 bucket that retains the last 30 days of metadata in case something breaks and I need to truobleshoot</li>
+        </ul>
+        </p>
+        <p>
+        <u>My Greatest Challenge:</u>
+        </p>
+        <ul>
+            <li>
+            The greatest challenge I faced was without a doubt in figuring out how to host my cleaning script on AWS and running it in a cost effective fashion. I spent maybe a month
+            trying to jam the entire thing inside a lambda function and trying to compress and slim down my pandas package with docker. In the end it proved to be much easier to 
+            create the EC2 instance and use lambda + cron to turn on the environment, run my script, then turn the instance back off once complete. 
+            </li>
         </ul></p>
         <p className="indent">
-        Although my website and this project might be simple by many modern standards, it still easily achieves enough complexity to still offer a host of other efficiencies and options
-        to explore to further improve and expand on. For example; I would still like to enable dynamic filtering for my insights, display a dynamic table, further expand my google alerts
-        or web scraping, and improve my text parsing logic just to name a few things!
+        Although my website and this project might be simple by many standards, it still easily achieves enough complexity to offer a host of other efficiencies and options
+        to explore and further improve/expand on.
         </p>
         </div>
     </div>
