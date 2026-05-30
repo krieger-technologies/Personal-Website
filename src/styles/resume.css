@@ -75,10 +75,16 @@ body {
       width: 80%; /* Reduce content width on mobile devices */
       height: calc(100vh - 350px); /* Adjust height to fit within viewport above navbar */
       overflow-y: auto;
-      max-width: 90%; /* Ensure it does not get too large */
+      max-width: 90%x; /* Ensure it does not get too large (prev: 90%) */
       margin: 20px auto; /* Provide more margin around the edges */
       padding: 15px; /* Slightly reduce padding for better fit */
       padding-top: 5px;
       padding-bottom: 20px;
+  }
+}
+/* Desktop: wider resume box */
+@media (min-width: 769px) {
+  .ResumeContent {
+    max-width: 900px;
   }
 }
