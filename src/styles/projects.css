@@ -287,3 +287,10 @@ body {
   border-color: #3f3cdaff;
   font-weight: 600;
 }
+
+/* Desktop: wider projects box */
+@media (min-width: 769px) {
+  .FirstProject {
+    max-width: 900px;
+  }
+}
