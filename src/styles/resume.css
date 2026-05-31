@@ -1,28 +1,23 @@
 body {
-    margin: 0;
-    padding: 0;
-    /* background-image: url('../imgs/analytics-02.jpg'); */
-    background-size: 100% auto; /* Fit horizontally, maintain aspect ratio */
-    background-position: top center; /* Align to top center */
-    background-repeat: repeat-y; /* Repeat vertically */
-    background-attachment: fixed; /* Fixed relative to the viewport */
-    color: black;
-    font-family: Arial, sans-serif;
-  }
-  
-  .Resume {
-    text-align: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../imgs/analytics-02.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: white;
-  }
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+.Resume {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../imgs/analytics-02.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+}
   
   .ResumeContent {
     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for readability */

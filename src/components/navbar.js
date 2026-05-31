@@ -1,17 +1,38 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import '../styles/navbar.css';
 
-// version 02
+const links = [
+  { path: '/home',     label: 'Home' },
+  { path: '/resume',   label: 'Resume' },
+  { path: '/projects', label: 'Projects' },
+];
+
 function Navbar() {
   const location = useLocation();
+  const activeIndex = links.findIndex(l => l.path === location.pathname);
 
   return (
     <nav className="navbar">
       <ul className="nav-links">
-        <li><a href="/home" className={location.pathname === '/home' ? 'active' : ''}>Home</a></li>
-        <li><a href="/resume" className={location.pathname === '/resume' ? 'active' : ''}>Resume</a></li>
-        <li><a href="/projects" className={location.pathname === '/projects' ? 'active' : ''}>Projects</a></li>
+        {links.map((link, i) => (
+          <li key={link.path}>
+            <Link
+              to={link.path}
+              className={location.pathname === link.path ? 'active' : ''}
+            >
+              {link.label}
+              {activeIndex === i && (
+                <motion.div
+                  className="nav-indicator"
+                  layoutId="nav-indicator"
+                  transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                />
+              )}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );

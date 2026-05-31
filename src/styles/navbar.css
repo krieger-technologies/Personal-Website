@@ -12,9 +12,8 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  padding-bottom: env(safe-area-inset-bottom); /* handles iPhone home bar */
+  padding-bottom: env(safe-area-inset-bottom);
 }
-
 .nav-links {
   list-style-type: none;
   margin: 0;
@@ -23,15 +22,14 @@
   justify-content: space-around;
   width: 100%;
 }
-
 .nav-links li {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .nav-links a {
+  position: relative;
   display: block;
   color: rgba(255, 255, 255, 0.85);
   text-align: center;
@@ -45,15 +43,21 @@
   font-weight: 400;
   letter-spacing: 0.03em;
 }
-
 .nav-links a:hover {
   color: white;
   background: none;
   text-shadow: 0 1px 10px rgba(255, 255, 255, 0.4);
 }
-
 .nav-links a.active {
   color: white;
-  border-bottom: 2px solid #007aff;
   padding-bottom: 12px;
+}
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #007aff;
+  border-radius: 2px;
 }

@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-
+import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/navbar';
-import Loading from './components/loading';
 import Home from './pages/home';
-import AboutMe from './pages/aboutme';
 import Resume from './pages/resume';
 import Projects from './pages/projects';
-import Blog from './pages/blog';
-import Contact from './pages/contact';
 
-// version 04 - includes loading spinner
+const pageVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } },
+  exit:    { opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
+};
+
 export default function App() {
-  const [loading, setLoading] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500); // Simulating loading delay for demo purposes
-
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
-
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <Navbar />
-      {loading ? (
-        <Loading />
-      ) : (
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/aboutme" element={<AboutMe />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      )}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+          }}
+        >
+          <Routes location={location}>
+            <Route index element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/projects" element={<Projects />} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
