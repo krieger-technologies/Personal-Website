@@ -43,6 +43,14 @@ body {
   mask-repeat: no-repeat;
   mask-size: cover;
   }
+
+  .ResumeContent h3 {
+  margin-bottom: 0;
+}
+
+.ResumeContent h4 {
+  margin-top: 0;
+}
   
 
   /* scroll bar element */

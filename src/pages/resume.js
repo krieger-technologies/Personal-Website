@@ -17,13 +17,19 @@ const Resume = () => {
         </p>
         <ul>
           <li>
-            Migration of our suite of reporting from old company servers and architecture onto new company architecture and ahearing to TSA requirements and guidelines
+            Led the development and setup of our teams primary reporting software on new company servers to ensure a smooth transition for users while adhering to SLA requirements and security
           </li>
           <li>
-            Development and maintenance of our reporting and analytics during the migration
+            Migration of file intake pipelines from Alteryx and Google Drive onto Azure Data Factoty and associated tools 
+          </li>
+          <li>
+            Migration of high value/usage reports from Inmars prefered reporting tool onto DHLs prefered tooling
+          </li>
+          <li>
+            Ensuring that client reports can pull from multiple differentiated WMS platforms and output a single standardized report 
           </li>
           <p></p>
-          <li><b>Tools:</b> SQL Server Management Studio, Azure Data Factory, SQL, python</li>
+          <li><b>Tools:</b> SQL Server Management Studio, Azure Data Factory, t-SQL</li>
         </ul>
         <h3>
           <u>Inmar Intelligence, Product Life Cycle Engineering</u>
@@ -69,7 +75,7 @@ const Resume = () => {
         <h4>Michigan State University, B.A. of Economics
           <br />2019
         </h4>
-        <p>Minor in Data Analytics; with special focus on Econometrics, programming in python and R, and
+        <p>Minor in Data Analytics; with special focus on Econometrics, programming in python & R, and
           statistics
         </p>
       </div>

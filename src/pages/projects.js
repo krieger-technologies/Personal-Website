@@ -39,9 +39,9 @@ useEffect(() => {
         <p className='indent'>
           This page is dedicated to various personal projects I've taken to in order to 
           expand my knowledge and capabilities, but most importantly just to keep challenging
-          myself and see how far I can take this hobby!</p>
+          myself and see how far I can take this interest.</p>
           <p className='indent'>
-          First and foremost this entire website should be taken as a personal project. It has been 
+          This entire website should be taken as a personal project. It has been 
           both immensely challenging and immensely rewarding; serving as a practical use case for me to
           start delving into javascript, linux, AWS, and webdev. In future iterations I would love to explore more basic and fundamental languages and frameworks both to
           avoid package dependency and risk from upgrades breaking functions and logic I rely on, but also to learn a lower and more fundamental level of programming.
