@@ -36,11 +36,11 @@ useEffect(() => {
     <div className="Projects">
       <div className="FirstProject" ref={firstProjectRef}>
         <h1>Projects</h1>
-        <p className='indent'>
+        <p>
           This page is dedicated to various personal projects I've taken to in order to 
           expand my knowledge and capabilities, but most importantly just to keep challenging
           myself and see how far I can take this interest.</p>
-          <p className='indent'>
+          <p>
           This entire website should be taken as a personal project. It has been 
           both immensely challenging and immensely rewarding; serving as a practical use case for me to
           start delving into javascript, linux, AWS, and webdev. In future iterations I would love to explore more basic and fundamental languages and frameworks both to

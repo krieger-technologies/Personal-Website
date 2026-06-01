@@ -168,13 +168,13 @@ export default function NewsScraperExplanation() {
           </div>
 
         </div>{/* end pipeline-card */}
-        <p className="indent">
+        <p>
         This started out as a relatively simple project in concept, but spanned many new and interesting fields of tech to pull off.<br/>
         The idea is simple, find some easily scrape-able and often updated news source, and do some basic analysis. My stretch goal was to fully automate it and
         make it a living process anyone with internet access can view. Here are some of the trials and tribulations I've faced;</p>
         <p>
         <p>
-        <u>A few notes & details about the process:</u>
+        <u><b>A few notes & details about the process:</b></u>
         <ul>
             <li>A Google news alert into an email address I setup just for this project seemed like the easiest way to begin aggregating a large volume of real world data.
                 A throwaway email has the benefit of keeping my main personal email address clean and free of clutter. In future iterations it might be interesting to test out some ideas
@@ -193,7 +193,7 @@ export default function NewsScraperExplanation() {
         </ul>
         </p>
         <p>
-        <u>My Greatest Challenge:</u>
+        <u><b>My Greatest Challenge:</b></u>
         </p>
         <ul>
             <li>
@@ -202,7 +202,7 @@ export default function NewsScraperExplanation() {
             create the EC2 instance and use lambda + cron to turn on the environment, run my script, then turn the instance back off once complete. 
             </li>
         </ul></p>
-        <p className="indent">
+        <p>
         Although my website and this project might be simple by many standards, it still easily achieves enough complexity to offer a host of other efficiencies and options
         to explore and further improve/expand on.
         </p>
