@@ -24,7 +24,7 @@ A responsive personal portfolio site built with React and deployed as a static s
 
 ## Features
 
-- **Multi-page layout** — About Me, Resume, and Projects sections
+- **Multi-page layout** — Resume, and Projects, and sub-project sections
 - **Responsive design** — optimized for both desktop and mobile viewports
 - **Custom navigation bar** with smooth transitions
 - **Translucent scrollable text overlay** on a full-bleed background image
