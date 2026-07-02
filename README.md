@@ -1,6 +1,6 @@
 # Personal Website
 
-A responsive personal portfolio site built with React and deployed as a static site on AWS, featuring a custom domain with HTTPS and CDN delivery via CloudFront.
+A responsive personal portfolio website built with React and deployed as a static site on AWS, featuring a custom domain with HTTPS and CDN delivery via CloudFront.
 
 **Live site:** [krieger-technologies.com](https://krieger-technologies.com)
 
