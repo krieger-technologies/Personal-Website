@@ -20,10 +20,10 @@ const Resume = () => {
             Led the development and setup of our teams primary reporting software on new company servers to ensure a smooth transition for users while adhering to SLA requirements and security
           </li>
           <li>
-            Migration of file intake pipelines from Alteryx and Google Drive onto Azure Data Factoty and associated tools 
+            Migration of file intake pipelines from Alteryx and Google Drive onto Azure Data Factory and associated tools 
           </li>
           <li>
-            Migration of high value/usage reports from Inmars prefered reporting tool onto DHLs prefered tooling
+            Migration of high value/usage reports from Inmar's preferred reporting tool onto DHL's preferred tooling
           </li>
           <li>
             Ensuring that client reports can pull from multiple differentiated WMS platforms and output a single standardized report 
