@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Plot from "react-plotly.js";
 
 export default function NewsScraperCard({
@@ -16,6 +16,11 @@ export default function NewsScraperCard({
   const [lastUpdated, setLastUpdated] = useState(null);
   const [dateRange, setDateRange] = useState("30d"); // default: latest 30 days
   const [chartView, setChartView] = useState("histogram");
+
+  const onContentReadyRef = useRef(onContentReady);
+  useEffect(() => {
+    onContentReadyRef.current = onContentReady;
+  }, [onContentReady]);
 
     console.log("NewsScraperCard render", {
     newsSummaryBarChartUrl,
@@ -63,7 +68,7 @@ export default function NewsScraperCard({
           // 🔑 Force Swiper to re-measure once content exists
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-              if (onContentReady) onContentReady();
+              if (onContentReadyRef.current) onContentReadyRef.current();
             });
           });
         })
@@ -319,7 +324,7 @@ export default function NewsScraperCard({
               requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                   window.dispatchEvent(new Event("resize"));
-                  if (onContentReady) onContentReady();
+                  if (onContentReadyRef.current) onContentReadyRef.current();
                 });
               });
             }}
@@ -377,7 +382,7 @@ export default function NewsScraperCard({
               requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                   window.dispatchEvent(new Event("resize"));
-                  if (onContentReady) onContentReady();
+                  if (onContentReadyRef.current) onContentReadyRef.current();
                 });
               });
             }}

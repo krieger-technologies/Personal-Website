@@ -11,7 +11,10 @@ const links = [
 
 function Navbar() {
   const location = useLocation();
-  const activeIndex = links.findIndex(l => l.path === location.pathname);
+
+  // Treat root path as an alias for /home
+  const currentPath = location.pathname === '/' ? '/home' : location.pathname;
+  const activeIndex = links.findIndex(l => l.path === currentPath);
 
   return (
     <nav className="navbar">
@@ -20,9 +23,9 @@ function Navbar() {
           <li key={link.path}>
             <Link
               to={link.path}
-              className={location.pathname === link.path ? 'active' : ''}
+              className={currentPath === link.path ? 'active' : ''}
             >
-              {link.label}
+              <span className="nav-label">{link.label}</span>
               {activeIndex === i && (
                 <motion.div
                   className="nav-indicator"

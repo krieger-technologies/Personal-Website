@@ -17,16 +17,19 @@ const Resume = () => {
         </p>
         <ul>
           <li>
-            Led the development and setup of our teams primary reporting software on new company servers to ensure a smooth transition for users while adhering to SLA requirements and security
+            Migrated a production reporting platform serving ~400 users to new infrastructure, including datasource migration and database indexing
+            to preserve load performance post-cutovers and security
           </li>
           <li>
-            Migration of file intake pipelines from Alteryx and Google Drive onto Azure Data Factory and associated tools 
+            Reverse-engineered an undocumented legacy Alteryx workflow and rebuilt it as a transactional T-SQL stored procedure with ADF orchestration, 
+            preventing a client's monthly commission reporting from being disrupted during a company-wide tool deprecation
           </li>
           <li>
-            Migration of high value/usage reports from Inmar's preferred reporting tool onto DHL's preferred tooling
+            Coordinated concurrency testing (~220 peak simultaneous users) with a DBA-led load simulation and the CX team, validating dashboard performance 
+            under production-level load ahead of go-live
           </li>
           <li>
-            Ensuring that client reports can pull from multiple differentiated WMS platforms and output a single standardized report 
+            Ensuring that key client reports can pull from multiple Warehouse Management Systems (WMS) and output a single standardized report
           </li>
           <p></p>
           <li><b>Tools:</b> SQL Server Management Studio, Azure Data Factory, t-SQL</li>
