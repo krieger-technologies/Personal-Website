@@ -37,18 +37,15 @@ useEffect(() => {
       <div className="FirstProject" ref={firstProjectRef}>
         <h1>Projects</h1>
         <p>
-          This page is dedicated to various personal projects I've taken to in order to 
-          expand my knowledge and capabilities, but most importantly just to keep challenging
-          myself and see how far I can take this interest.</p>
+          This page showcases a collection of personal projects I've built to expand my technical skills and explore new tools and frameworks. 
+          Each one reflects a genuine interest in solving real problems and continuing to grow as a developer.</p>
           <p>
-          This entire website should be taken as a personal project. It has been 
-          both immensely challenging and immensely rewarding; serving as a practical use case for me to
-          start delving into javascript, linux, AWS, and webdev. In future iterations I would love to explore more basic and fundamental languages and frameworks both to
-          avoid package dependency and risk from upgrades breaking functions and logic I rely on, but also to learn a lower and more fundamental level of programming.
-          For now, Javascript React gets the job done. 
-          Particularly nesting the project cards below and polishing up the scroll behavior between one card 
-          and the next proved to be an especially challenging and rewarding task. Automation is fun but a smooth
-          user experience makes it easier for everyone to appreciate.
+          In fact, this website is itself one of those projects. It has served as a hands-on introduction to JavaScript, Linux, AWS, and web development, 
+          and has been as rewarding to build as it has been challenging. Looking ahead, I'm interested in exploring lower-level and more foundational 
+          languages and frameworks, both to reduce dependency risk from frequent package updates and to deepen my understanding of how things work under 
+          the hood. For now, React has been an effective tool for the job. Building and refining the nested project cards below, along with the scroll 
+          behavior between them, was one of the more demanding and satisfying parts of the process. Automation is powerful, but a smooth, polished user 
+          experience is what makes it accessible and worthwhile.
         </p>
 
         <div style={{ marginTop: "30px" }} ref={carouselRef}>
