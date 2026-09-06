@@ -1,0 +1,244 @@
+/* ============================================
+   AI-Assisted Migration — card styles
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+.mig-card-root {
+  width: 100%;
+  color: #f1f1f1;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Card shell ── */
+.mig-card {
+  background: rgba(10, 12, 18, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.mig-topper {
+  height: 4px;
+  background: linear-gradient(90deg, #7c5cff 0%, #00c6ff 60%, rgba(124, 92, 255, 0) 100%);
+}
+
+/* ── Header ── */
+.mig-header {
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mig-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9d86ff;
+  margin-bottom: 6px;
+}
+
+.mig-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.mig-subtitle {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Then vs. now ── */
+.mig-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 18px 22px;
+}
+
+.mig-col {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.mig-col-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.mig-col-label--muted  { color: rgba(255, 255, 255, 0.4); }
+.mig-col-label--accent { color: #9d86ff; }
+
+.mig-col-heading {
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.mig-col-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Divider ── */
+.mig-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 22px;
+  margin: 6px 0 16px;
+}
+
+.mig-divider::before,
+.mig-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mig-divider span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ── Steps ── */
+.mig-steps {
+  padding: 0 22px 8px;
+}
+
+.mig-step {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+.mig-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+  background: rgba(124, 92, 255, 0.18);
+  border: 1.5px solid rgba(124, 92, 255, 0.55);
+  color: #b9a7ff;
+}
+
+.mig-step-body {
+  padding-bottom: 18px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mig-step-title {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.mig-step-desc {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+}
+
+/* ── Metrics row ── */
+.mig-metrics {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 16px 20px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mig-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.mig-metric-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+
+.mig-metric-lbl {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Inline code ── */
+.mig-card-root code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.88em;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* ── Prose below the card ── */
+.mig-text > p {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.mig-text em {
+  color: rgba(255, 255, 255, 0.95);
+  font-style: italic;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .mig-header { padding: 16px 16px 12px; }
+  .mig-title { font-size: 15px; }
+  .mig-compare {
+    grid-template-columns: 1fr;
+    padding: 14px 16px;
+  }
+  .mig-steps { padding: 0 16px 6px; }
+  .mig-node { width: 26px; height: 26px; font-size: 11px; }
+  .mig-step-title { font-size: 13px; }
+  .mig-metrics { padding: 0 12px 16px; }
+  .mig-metric { min-width: 45%; }
+}
