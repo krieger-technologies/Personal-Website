@@ -10,7 +10,6 @@ import "../styles/project-carousel.css";
 export default function ProjectCarousel({
   projects,
   parentRef,
-  carouselRef,
   newsSummaryBarChartUrl,
   newsDetailTableUrl,
   newsMetadataUrl,

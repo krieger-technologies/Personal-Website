@@ -13,7 +13,6 @@ export default function Projects() {
   ];
 
   const firstProjectRef = useRef(null);
-  const carouselRef = useRef(null);
 
   // --- Step 1: fetch latest URL ---
   const [newsSummaryBarChartUrl, setNewsSummaryBarChartUrl] = useState(null);
@@ -48,11 +47,10 @@ useEffect(() => {
           experience is what makes it accessible and worthwhile.
         </p>
 
-        <div style={{ marginTop: "30px" }} ref={carouselRef}>
+        <div style={{ marginTop: "30px" }}>
         <ProjectCarousel
           projects={projectData}
           parentRef={firstProjectRef}
-          carouselRef={carouselRef}
           newsSummaryBarChartUrl={newsSummaryBarChartUrl}
           newsDetailTableUrl={newsDetailTableUrl}
           newsMetadataUrl={newsMetadataUrl}
