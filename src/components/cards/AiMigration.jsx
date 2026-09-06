@@ -7,11 +7,12 @@ export default function AiMigrationCard() {
         <div className="mig-topper" />
 
         <div className="mig-header">
-          <div className="mig-eyebrow">Dev Process · Retrospective</div>
+          <div className="mig-eyebrow">Tooling Evaluation · Retrospective</div>
           <h2 className="mig-title">Migrating This Site: Create React App → Vite</h2>
           <p className="mig-subtitle">
-            An experiment in how hands-off I could be — letting an AI agent run a
-            full build-tooling migration while I stayed in a review-and-approve seat.
+            A working evaluation of an AI coding agent (Claude Code) on a real
+            production migration — I set the plan and the guardrails, directed the
+            work, and reviewed and validated every change.
           </p>
         </div>
 
@@ -19,24 +20,27 @@ export default function AiMigrationCard() {
         <div className="mig-compare">
           <div className="mig-col">
             <div className="mig-col-label mig-col-label--muted">Earlier projects</div>
-            <div className="mig-col-heading">Hands-on</div>
+            <div className="mig-col-heading">Chat-assisted, manual</div>
             <p className="mig-col-text">
-              I used ChatGPT, and later Claude in a normal chat window: describe the
-              problem, get a snippet, paste it in myself, run it, report back the
-              error, repeat. I made every edit and ran every command. The AI was a
-              very good second pair of eyes — the hands were always mine.
+              I used ChatGPT, and later Claude in a chat window, as a sounding
+              board — talk through options, get a snippet. I did the integration
+              myself: adapting suggestions to the codebase, trying alternative
+              approaches, tearing things apart to see how they worked, and debugging
+              what broke. Every edit passed through my hands, so I understood each
+              line — but I also carried the whole mechanical loop.
             </p>
           </div>
           <div className="mig-col">
             <div className="mig-col-label mig-col-label--accent">This migration</div>
-            <div className="mig-col-heading">Hands-off</div>
+            <div className="mig-col-heading">Agent-assisted, developer-directed</div>
             <p className="mig-col-text">
-              I ran it through Claude Code — an agent that reads the repo, edits
-              files, and runs commands directly. My job shifted from typing to
-              deciding: approve the plan, answer the branching questions, sign off
-              on each commit. The agent did the CRA removal, the <code>.jsx</code>{' '}
-              renames, the Vite config, the Jest → Vitest swap, dependency cleanup,
-              and the CloudFront fixes.
+              I used Claude Code — an agent that reads the repo, edits files, and
+              runs commands directly. I owned the shape of the work: approved the
+              migration plan, made the calls on the <code>.jsx</code> renames and the
+              build-output path, and signed off on every commit. The agent handled
+              execution — CRA removal, Vite config, the Jest → Vitest swap,
+              dependency cleanup, CloudFront fixes — and I read each diff before it
+              landed.
             </p>
           </div>
         </div>
@@ -47,17 +51,17 @@ export default function AiMigrationCard() {
           <div className="mig-step">
             <div className="mig-node">01</div>
             <div className="mig-step-body">
-              <div className="mig-step-title">Check-ins</div>
+              <div className="mig-step-title">Staged check-ins</div>
               <div className="mig-step-desc">
-                The agent stopped at every stage boundary and waited for my explicit
-                OK before committing. Nothing moved forward on autopilot.
+                The agent paused at every stage boundary for explicit sign-off before
+                committing. I read each change rather than rubber-stamping it.
               </div>
             </div>
           </div>
           <div className="mig-step">
             <div className="mig-node">02</div>
             <div className="mig-step-body">
-              <div className="mig-step-title">Git discipline</div>
+              <div className="mig-step-title">Version control</div>
               <div className="mig-step-desc">
                 A dedicated feature branch, a <code>pre-vite-migration</code> rollback
                 tag pushed <em>before</em> any change, one commit per stage, pushed to
@@ -70,8 +74,8 @@ export default function AiMigrationCard() {
             <div className="mig-step-body">
               <div className="mig-step-title">Live validation</div>
               <div className="mig-step-desc">
-                I deploy to the real site and click through it myself before anything
-                merges to <code>main</code>. Same rule for this card.
+                I deploy to the real site and test it myself before anything merges to{' '}
+                <code>main</code> — same rule for this card.
               </div>
             </div>
           </div>
@@ -101,22 +105,24 @@ export default function AiMigrationCard() {
 
       <div className="mig-text">
         <p>
-          The interesting part wasn't the migration itself — CRA to Vite is a
-          well-worn path — it was watching how little I needed to touch the keyboard.
-          On earlier projects the bottleneck was me: reading the suggestion, applying
-          it, finding the typo, going back. Handing the mechanical work to an agent
-          collapsed that loop.
+          CRA to Vite is a well-worn path; the point of running it this way was to
+          learn where a coding agent is genuinely useful on a real migration, and
+          where a developer still has to step in. The mechanical loop — apply a
+          change, hit the typo, go back — collapsed. The decision-making didn't.
         </p>
         <p>
-          What it didn't remove was judgment. Every "rename the files or configure
-          around it?", every "this touches production — are you sure?", every commit
-          message still went through me. The habits I built doing this the manual way
-          — branch first, tag a rollback point, verify live — mattered <em>more</em>{' '}
-          with an agent moving quickly, not less.
+          Every "rename the files or configure around it?", every "this touches
+          production — are you sure?", every dependency-version call still needed a
+          person who knew the codebase. The version-control and validation habits I
+          built doing this work manually mattered <em>more</em> with an agent moving
+          quickly, not less: fast execution is only safe with a clean rollback path
+          and a real review step in front of it.
         </p>
         <p>
-          This card is itself part of the experiment: drafted by the agent, on its
-          own branch, waiting on my live check before it ships.
+          Net result: build tooling off a deprecated dependency, a security
+          audit from 62 findings to zero, a test suite that runs again, and a
+          markedly lighter first load. This card was built with the same workflow
+          it describes — on its own branch, pending a live check before it ships.
         </p>
       </div>
     </div>

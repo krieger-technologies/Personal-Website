@@ -10,8 +10,8 @@ export default function Projects() {
   const projectData = [
     { title: "News Scraper", component: NewsScraperCard },
     { title: "News Scraper - Methodology", component:NewsScraperExplanation},
-    { title: "Home Lab Setup", component: HomeLabCard },
-    { title: "AI-Assisted Migration", component: AiMigrationCard }
+    { title: "AI-Assisted Migration", component: AiMigrationCard },
+    { title: "Home Lab Setup", component: HomeLabCard }
   ];
 
   const firstProjectRef = useRef(null);
