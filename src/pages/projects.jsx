@@ -3,13 +3,15 @@ import ProjectCarousel from '../components/ProjectCarousel';
 import NewsScraperCard from '../components/cards/NewsScraper';
 import HomeLabCard from '../components/cards/HomeLab';
 import NewsScraperExplanation from '../components/cards/NewsScraperExplanation';
+import AiMigrationCard from '../components/cards/AiMigration';
 import { useRef, useState, useEffect } from 'react';
 
 export default function Projects() {
   const projectData = [
     { title: "News Scraper", component: NewsScraperCard },
     { title: "News Scraper - Methodology", component:NewsScraperExplanation},
-    { title: "Home Lab Setup", component: HomeLabCard }
+    { title: "Home Lab Setup", component: HomeLabCard },
+    { title: "AI-Assisted Migration", component: AiMigrationCard }
   ];
 
   const firstProjectRef = useRef(null);
