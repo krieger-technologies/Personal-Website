@@ -1,19 +1,28 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import Plot from "react-plotly.js";
 
+// Tag data-file requests with the pipeline's last-run timestamp so the browser
+// and CloudFront can cache them long-term, while a new ETL run (new timestamp)
+// produces a new URL that busts the cache exactly once.
+function withVersion(url, version) {
+  if (!url || !version) return url;
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}v=${encodeURIComponent(version)}`;
+}
+
 export default function NewsScraperCard({
   newsSummaryBarChartUrl,
   newsDetailTableUrl,
   metadataUrl,
-  onContentReady
-})
-
- {
+  onContentReady,
+}) {
   const [chartData, setChartData] = useState(null);
   const [error, setError] = useState(null);
   const [isNarrow, setIsNarrow] = useState(window.innerWidth < 600);
   const [detailData, setDetailData] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
+  // null = version not resolved yet; "" = resolved but unknown (fetch un-versioned)
+  const [dataVersion, setDataVersion] = useState(null);
   const [dateRange, setDateRange] = useState("30d"); // default: latest 30 days
   const [chartView, setChartView] = useState("histogram");
 
@@ -22,15 +31,37 @@ export default function NewsScraperCard({
     onContentReadyRef.current = onContentReady;
   }, [onContentReady]);
 
-    console.log("NewsScraperCard render", {
-    newsSummaryBarChartUrl,
-    newsDetailTableUrl
-  });
+  // --- Step 1: resolve the current data version from the tiny run-timestamp file ---
+  // ~120 bytes and served no-store, so revalidating on every visit is negligible.
+  useEffect(() => {
+    if (!metadataUrl) return;
+    let isMounted = true;
+    fetch(metadataUrl, { cache: "no-cache" })
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+      })
+      .then((meta) => {
+        if (!isMounted) return;
+        setLastUpdated(meta.last_updated_utc);
+        setDataVersion(meta.last_updated_utc || "");
+      })
+      .catch((err) => {
+        if (!isMounted) return;
+        console.error("Metadata fetch failed:", err);
+        setDataVersion(""); // fall back to un-versioned URLs so charts still load
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, [metadataUrl]);
 
-
+  // --- Step 2: fetch the data files once the version is known ---
+  // Requests are cacheable (no cache-buster); the ?v= tag changes only when the
+  // pipeline publishes new data, so repeat visits are served from cache.
   useEffect(() => {
     if (!newsSummaryBarChartUrl) return;
-
+    if (dataVersion === null) return; // wait for Step 1
 
     let isMounted = true;
 
@@ -45,40 +76,34 @@ export default function NewsScraperCard({
     // Listen for resize / orientation change
     window.addEventListener("resize", updateWidth);
 
-    // --- Fetch data ---
-    fetch(`${newsSummaryBarChartUrl}?t=${Date.now()}`, { cache: "no-store" })
+    // --- Bar-chart summary ---
+    fetch(withVersion(newsSummaryBarChartUrl, dataVersion))
       .then((res) => {
         if (!res.ok) throw new Error(res.status);
-        return res.text();
+        return res.json();
       })
-      .then((text) => {
-          if (!isMounted) return;
+      .then((data) => {
+        if (!isMounted) return;
+        const records = Array.isArray(data)
+          ? data
+          : data.data || data.records || [];
 
-          console.log(
-            "RAW SUMMARY RESPONSE (first 200 chars):",
-            text.slice(0, 200)
-          );
-
-          const data = JSON.parse(text); // this will likely throw
-          const records = Array.isArray(data)
-            ? data
-            : data.data || data.records || [];
-
-          setChartData(records);
-          // 🔑 Force Swiper to re-measure once content exists
+        setChartData(records);
+        // 🔑 Force Swiper to re-measure once content exists
+        requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              if (onContentReadyRef.current) onContentReadyRef.current();
-            });
+            if (onContentReadyRef.current) onContentReadyRef.current();
           });
-        })
+        });
+      })
       .catch((err) => {
         if (!isMounted) return;
         console.error("JSON fetch failed:", err);
         setError("Network error while loading chart data");
       });
-      // read in for detail table
-      fetch(`${newsDetailTableUrl}?t=${Date.now()}`, { cache: "no-store" })
+
+    // --- Row-level detail table ---
+    fetch(withVersion(newsDetailTableUrl, dataVersion))
       .then((res) => {
         if (!res.ok) throw new Error(res.status);
         return res.json();
@@ -91,27 +116,13 @@ export default function NewsScraperCard({
         if (!isMounted) return;
         console.error("Detail JSON fetch failed:", err);
       });
+
     // --- Cleanup ---
     return () => {
       isMounted = false;
       window.removeEventListener("resize", updateWidth);
     };
-  }, [newsSummaryBarChartUrl, newsDetailTableUrl]);
-    // FETCH LAST SCRIPT RUNTIME
-    useEffect(() => {
-      if (!metadataUrl) return;
-      fetch(`${metadataUrl}?t=${Date.now()}`, { cache: "no-store" })
-        .then(res => {
-          if (!res.ok) throw new Error(res.status);
-          return res.json();
-        })
-        .then(meta => {
-          setLastUpdated(meta.last_updated_utc);
-        })
-        .catch(err => {
-          console.error("Metadata fetch failed:", err);
-        });
-    }, [metadataUrl]);
+  }, [newsSummaryBarChartUrl, newsDetailTableUrl, dataVersion]);
     // standardize & format dates
     const parseAlertDate = (s) => {
       if (!s) return null;
@@ -401,8 +412,8 @@ export default function NewsScraperCard({
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredDetailData.sort((a, b) => {
-                    // sort table by date
+                  {[...filteredDetailData].sort((a, b) => {
+                    // sort table by date (copy first — never mutate the memoized array)
                     const da = parseAlertDate(a.alert_date);
                     const db = parseAlertDate(b.alert_date);
 
