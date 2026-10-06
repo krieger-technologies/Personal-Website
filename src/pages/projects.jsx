@@ -4,6 +4,7 @@ import NewsScraperCard from '../components/cards/NewsScraper';
 import HomeLabCard from '../components/cards/HomeLab';
 import NewsScraperExplanation from '../components/cards/NewsScraperExplanation';
 import AiMigrationCard from '../components/cards/AiMigration';
+import HoneypotCard from '../components/cards/Honeypot';
 import { useRef, useState, useEffect } from 'react';
 
 export default function Projects() {
@@ -11,6 +12,7 @@ export default function Projects() {
     { title: "News Scraper", component: NewsScraperCard },
     { title: "News Scraper - Methodology", component:NewsScraperExplanation},
     { title: "AI-Assisted Migration", component: AiMigrationCard },
+    { title: "Cowrie SSH Honeypot", component: HoneypotCard },
     { title: "Home Lab Setup", component: HomeLabCard }
   ];
 
