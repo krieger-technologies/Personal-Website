@@ -13,12 +13,12 @@ const Resume = () => {
         </h3>
         <h4>Senior Data Engineer, Data Analytics</h4>
         <p>
-          As a Senior Data Engineer I oversaw and/or contributed to:
+          DHL acquired Inmar Intelligence in Feb 2025. My team develops and maintains e-commerce returns reporting for internal and external users.
         </p>
         <ul>
           <li>
-            Migrated a production reporting platform serving ~400 users to new infrastructure, including datasource migration and database indexing
-            to preserve load performance post-cutovers and security
+            Built Python scripting automations to reduce technical debt and improve project planning by parsing XML files, generating text from planning documents,
+            and updating SQL queries across multiple reports. On average saving 5+ hours per sprint and improving accuracy and efficiency of our workstreams
           </li>
           <li>
             Reverse-engineered an undocumented legacy Alteryx workflow and rebuilt it as a transactional T-SQL stored procedure with ADF orchestration, 
@@ -42,7 +42,7 @@ const Resume = () => {
           Associate Data Engineer, Data Analytics
         </h4>
         <p>
-          As an Associate Data Engineer I have overseen and/or contributed to:
+          Inmar Intelligence specializes in delivering technology and data solutions helping retailers and brands manage commerce and reverse logistics reporting.
         </p>
         <ul>
           <li>
@@ -61,7 +61,7 @@ const Resume = () => {
           Data Analyst, Advanced Analytics
         </h4>
         <p>
-          As a Data Analyst for RGM I oversaw or contributed to:
+          Danone is one of the largest dairy and dairy alternative manufacturers in North America where I supported Sales and Go-To-Market teams with analytics on pricing, promotions, and retail placements.
         </p>
         <ul>
           <li>Delivery of key insights and tooling to all other business units. Our reporting and tools were used to regularly
