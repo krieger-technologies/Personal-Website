@@ -28,6 +28,14 @@ body {
   
   .ResumeContent {
     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for readability */
+    /* Soft left/right edges: the panel fades in over --fade-side; text and scrollbar stay crisp */
+    --fade-side: 24px;
+    background-color: transparent;
+    background-image: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 0.7) var(--fade-side),
+      rgba(0, 0, 0, 0.7) calc(100% - var(--fade-side)),
+      rgba(0, 0, 0, 0) 100%);
     padding: 20px; /* Padding around the text */
     border-radius: 20px; /* Rounded corners for a softer look */
     max-width: 600px; /* Limit the width of the content */
