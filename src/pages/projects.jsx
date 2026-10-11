@@ -5,7 +5,7 @@ import HomeLabCard from '../components/cards/HomeLab';
 import NewsScraperExplanation from '../components/cards/NewsScraperExplanation';
 import AiMigrationCard from '../components/cards/AiMigration';
 import HoneypotCard from '../components/cards/Honeypot';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 
 export default function Projects() {
   const projectData = [
@@ -17,6 +17,30 @@ export default function Projects() {
   ];
 
   const firstProjectRef = useRef(null);
+
+  // Drop the bottom fade once scrolled to the end so the last lines stay readable
+  const [atBottom, setAtBottom] = useState(false);
+
+  const checkBottom = useCallback(() => {
+    const el = firstProjectRef.current;
+    if (!el) return;
+    setAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 1);
+  }, []);
+
+  // also when content changes height (card switches, data/charts loading) or the window resizes
+  useEffect(() => {
+    const el = firstProjectRef.current;
+    if (!el) return;
+    checkBottom();
+    const observer = new ResizeObserver(checkBottom);
+    observer.observe(el);
+    Array.from(el.children).forEach((child) => observer.observe(child));
+    window.addEventListener('resize', checkBottom);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', checkBottom);
+    };
+  }, [checkBottom]);
 
   // --- Step 1: fetch latest URL ---
   const [newsSummaryBarChartUrl, setNewsSummaryBarChartUrl] = useState(null);
@@ -37,17 +61,20 @@ useEffect(() => {
 
   return (
     <div className="Projects">
-      <div className="FirstProject" ref={firstProjectRef}>
+      <div
+        className={`FirstProject${atBottom ? ' at-bottom' : ''}`}
+        ref={firstProjectRef}
+        onScroll={checkBottom}
+      >
         <h1>Projects</h1>
         <p>
-          This page showcases a collection of personal projects I've built to expand my technical skills and explore new areas of interest.</p>
-          <p>
-            <ol>
-            <li>News Scraper - Exploration into creating a live news scraper + basic analytics</li>
-            <li>News Scraper - Methodology</li>
-            <li>Honeypot / Cybersecurity - [IN PROGRESS] Exploration into collecting & analyzing botnet live botnet traffic safely</li>
-            </ol>
+          Personal projects I've built to learn new tools and dig into topics I find interesting.
         </p>
+            <ol>
+            <li><b>News Scraper</b> - Live results & basic analytics about bans in news headlines across the U.S.</li>
+            <li><b>News Scraper : </b><i>Methodology</i> - How the pipeline collects, tags, and publishes the data</li>
+            <li><b>Honeypot / Cybersecurity</b> - [IN PROGRESS] Exploration into collecting & analyzing live botnet traffic safely</li>
+            </ol>
 
         <div style={{ marginTop: "30px" }}>
         <ProjectCarousel
