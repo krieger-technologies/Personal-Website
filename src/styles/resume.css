@@ -1,3 +1,10 @@
+/* Animatable size of the resume box's bottom fade (15% = the original fade) */
+@property --fade-bottom {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 15%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -35,13 +42,20 @@ body {
 
 
   /* Top + bottom fade (text floats into background) */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black calc(100% - var(--fade-bottom, 15%)), transparent 100%);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: cover;
 
-  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 85%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black calc(100% - var(--fade-bottom, 15%)), transparent 100%);
   mask-repeat: no-repeat;
   mask-size: cover;
+
+  /* bottom fade eases out once scrolled to the end (class set in resume.jsx) */
+  transition: --fade-bottom 0.3s ease;
+  }
+
+  .ResumeContent.at-bottom {
+    --fade-bottom: 0%;
   }
 
   .ResumeContent h3 {

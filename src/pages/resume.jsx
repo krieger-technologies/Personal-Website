@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import '../styles/resume.css';
 
 /* function Resume() { */
 const Resume = () => {
+  // Drop the bottom fade once scrolled to the end so the last lines stay readable
+  const boxRef = useRef(null);
+  const [atBottom, setAtBottom] = useState(false);
+
+  const checkBottom = useCallback(() => {
+    const el = boxRef.current;
+    if (!el) return;
+    setAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 1);
+  }, []);
+
+  // also on load/resize: a tall screen may show everything without scrolling
+  useEffect(() => {
+    checkBottom();
+    window.addEventListener('resize', checkBottom);
+    return () => window.removeEventListener('resize', checkBottom);
+  }, [checkBottom]);
+
   return (
     <div className="Resume">
-      <div className="ResumeContent">
+      <div
+        ref={boxRef}
+        onScroll={checkBottom}
+        className={`ResumeContent${atBottom ? ' at-bottom' : ''}`}
+      >
         <h1>Resume</h1>
         <h3>
             <u>DHL - North America, Data Analytics</u>
