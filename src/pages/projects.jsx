@@ -18,12 +18,14 @@ export default function Projects() {
 
   const firstProjectRef = useRef(null);
 
-  // Drop the bottom fade once scrolled to the end so the last lines stay readable
+  // Drop the top/bottom fade at either end of the scroll so the first and last lines stay readable
+  const [atTop, setAtTop] = useState(true);
   const [atBottom, setAtBottom] = useState(false);
 
   const checkBottom = useCallback(() => {
     const el = firstProjectRef.current;
     if (!el) return;
+    setAtTop(el.scrollTop <= 1);
     setAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 1);
   }, []);
 
@@ -62,7 +64,7 @@ useEffect(() => {
   return (
     <div className="Projects">
       <div
-        className={`FirstProject${atBottom ? ' at-bottom' : ''}`}
+        className={`FirstProject${atTop ? ' at-top' : ''}${atBottom ? ' at-bottom' : ''}`}
         ref={firstProjectRef}
         onScroll={checkBottom}
       >

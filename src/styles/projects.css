@@ -5,6 +5,13 @@
   initial-value: 15%;
 }
 
+/* Animatable size of the scroll box's top fade (projects page only) */
+@property --fade-top {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 8%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -61,16 +68,20 @@ body {
     rgba(0, 0, 0, 0) 100%);
 
   /* Top + bottom fade (text floats into background) — same as the resume box */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black calc(100% - var(--fade-bottom, 15%)), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black var(--fade-top, 8%), black calc(100% - var(--fade-bottom, 15%)), transparent 100%);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: cover;
 
-  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black calc(100% - var(--fade-bottom, 15%)), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black var(--fade-top, 8%), black calc(100% - var(--fade-bottom, 15%)), transparent 100%);
   mask-repeat: no-repeat;
   mask-size: cover;
 
-  /* bottom fade eases out once scrolled to the end (class set in projects.jsx) */
-  transition: --fade-bottom 0.3s ease;
+  /* top/bottom fades ease out at the ends of the scroll (classes set in projects.jsx) */
+  transition: --fade-top 0.3s ease, --fade-bottom 0.3s ease;
+}
+
+.FirstProject.at-top {
+  --fade-top: 0%;
 }
 
 .FirstProject.at-bottom {
