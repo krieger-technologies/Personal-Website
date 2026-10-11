@@ -1,44 +1,72 @@
 import '../../styles/Honeypot.css';
+import sessionsPerDay from '../../charts/honeypot/sessions-per-day.png';
+import ipsByCountry from '../../charts/honeypot/ips-by-country.png';
+import postLogin from '../../charts/honeypot/post-login-behavior.png';
+import newBehavior from '../../charts/honeypot/new-behavior-per-day.png';
+import botGroups from '../../charts/honeypot/bot-groups.png';
+import fingerprints from '../../charts/honeypot/fingerprints-vs-families.png';
 
-// Early-findings snapshot — aggregates only, computed locally from the
-// honeypot archive. Update by hand until the live stats.json pipeline exists.
+// Findings snapshot — aggregates only, computed locally from the full honeypot
+// archive (Oct 4–11, 2026). Update by hand until the live stats.json pipeline exists.
 const SNAPSHOT = {
-  asOf: "Oct 8, 2026",
-  window: "first 3 days online",
+  asOf: "Oct 11, 2026",
+  window: "first week online",
 };
 
 const HEADLINE_STATS = [
-  { value: "21,236", label: "SSH break-in attempts" },
-  { value: "773", label: "unique attacking IPs" },
-  { value: "86", label: "countries of origin" },
-  { value: "~11s", label: "between attempts on the busiest day" },
+  { value: "92,276", label: "SSH break-in attempts" },
+  { value: "1,273", label: "unique attacking IPs" },
+  { value: "101", label: "countries of origin" },
+  { value: "~2.6s", label: "between attempts on the busiest day" },
 ];
 
 const TOP_PASSWORDS = [
-  { pw: "P@ssw0rd" },
   { pw: "123456" },
+  { pw: "P@ssw0rd" },
   { pw: "345gs5662d34", note: "hardcoded botnet credential" },
+  { pw: "3245gs5662d34", note: "variant of the same credential" },
   { pw: "admin" },
   { pw: "12345678" },
-  { pw: "password" },
 ];
 
 const FINDINGS = [
-  <><strong>~20,100 login attempts</strong> using 3,141 different usernames
-    and 6,874 different passwords; <code>root</code> was the target in 27% of them.</>,
-  <><strong>72% of all commands</strong> were <code>uname</code> system checks — bots
-    fingerprint the machine before deciding what to do with it.</>,
-  <><strong>129 sessions</strong> from the <code>mdrfckr</code> worm, which wipes the
+  <><strong>~90,000 login attempts</strong> using 3,414 different usernames
+    and 33,876 different passwords; <code>root</code> was the target in 69% of
+    them, mostly from a single bot.</>,
+  <><strong>One IP produced 66% of all traffic:</strong> a Singapore server that
+    logged in 60,000+ times just to run <code>echo "ok"</code>, confirming which
+    guessed passwords work.</>,
+  <><strong>92% of all other commands</strong> were <code>uname</code> system
+    checks — bots fingerprint the machine before deciding what to do with it.</>,
+  <><strong>287 sessions</strong> from the <code>mdrfckr</code> worm, which wipes the
     account's SSH keys and plants its own for permanent backdoor access.</>,
-  <><strong>471 malware download attempts</strong> across 11 unique payloads —
-    quarantined on the honeypot, never retrieved.</>,
-  <><strong>97% of clients</strong> identify as <code>SSH-2.0-Go</code>: automated
+  <><strong>951 files captured</strong> (downloads, uploads and files bots wrote)
+    across 27 unique files, including RedTail cryptominer and Mirai-family
+    builds — stored on the honeypot, never executed.</>,
+  <><strong>98% of clients</strong> identify as <code>SSH-2.0-Go</code>: automated
     tooling, not people at keyboards.</>,
-  <><strong>Heavily lopsided:</strong> one IP produced 21% of all traffic. The US
-    has the most attacking IPs, but the Netherlands sent 54% of the volume.</>,
   <><strong>Roughly half residential:</strong> ~51% of attacking IPs look like
-    home connections (likely compromised machines), ~43% datacenter, ~6% proxy/VPN
-    or mobile.</>,
+    home connections (likely compromised machines), ~44% datacenter, ~6% proxy/VPN
+    or mobile. The US has the most attacking IPs.</>,
+];
+
+// Charts rendered from the honeypot archive (aggregates only). Regenerate by hand
+// until the live pipeline exists.
+const CHARTS_AS_OF = "Oct 11, 2026";
+
+const CHARTS = [
+  { src: sessionsPerDay, alt: "Stacked bar chart of SSH sessions per day, Oct 4 to 11, 2026, split into one Singapore validator bot and all other sources; the bot makes up most of the peak of 33,751 sessions on Oct 8.",
+    caption: <>One IP in Singapore drives the spike: from Oct 7 it logged in tens of thousands of times just to confirm each guessed root password works.</> },
+  { src: ipsByCountry, alt: "Bar chart of attacking IPs by country: United States 272, China 114, the Netherlands 78, then Argentina, Russia, Vietnam, India, France, Indonesia, South Korea, Germany and Hong Kong.",
+    caption: <>Where connections come from, not where operators sit — most of these are rented cloud servers or compromised machines.</> },
+  { src: postLogin, alt: "Bar chart on a log scale of what bots did after logging in: 27,320 sessions fingerprinted the system and left, 608 fetched or dropped malware, 367 requested a TCP tunnel, 295 planted an SSH key.",
+    caption: <>Most bots only check what kind of machine they reached. A few hundred sessions try to install malware or a permanent SSH backdoor.</> },
+  { src: newBehavior, alt: "Line chart of things seen for the first time each day: new commands peaked at 27 on Oct 9, new client fingerprints rose to 13 on Oct 10, and new malware payloads stayed between 0 and 8.",
+    caption: <>New commands, client fingerprints and payloads keep appearing every day, so the honeypot is still worth running.</> },
+  { src: botGroups, alt: "Bar chart on a log scale of 77 bot groups; the largest are a credential validator with 60,309 sessions and generic Go scanners, and evidence-labeled groups include the mdrfckr key-plant, RedTail cryptominer and a Mirai-style loader.",
+    caption: <>Sessions grouped into bot families by shared evidence — the same payload, planted SSH key, download host or tunnel target. Orange groups are identified from that evidence.</> },
+  { src: fingerprints, alt: "Dot plot of the 8 SSH client fingerprints shared by the most bot groups; one Go fingerprint is shared by RedTail, a Mirai-style loader and an embedded-key dropper, while the mdrfckr key-plant appears under two different fingerprints.",
+    caption: <>An SSH client fingerprint identifies the toolkit, not the author: Go's default fingerprint is shared by unrelated malware families.</> },
 ];
 
 export default function HoneypotCard() {
@@ -59,17 +87,17 @@ export default function HoneypotCard() {
 
         <div className="hp-body">
           <p>
-            Logs are pulled off the droplet one-way, deduplicated into an
+            Logs are pulled off the VPS one-way, deduplicated into an
             archive, and enriched with IP geolocation, ASN, and
             datacenter-vs-residential data. Only aggregate findings will be
-            published — no raw attacker data, and never the droplet's
+            published — no raw attacker data, and never the VPS's
             address or its administrative access point.
           </p>
         </div>
 
         <div className="hp-findings">
           <div className="hp-section-label">
-            Early findings · {SNAPSHOT.window}
+            Findings · {SNAPSHOT.window}
           </div>
 
           <div className="hp-stats">
@@ -103,8 +131,24 @@ export default function HoneypotCard() {
           </div>
 
           <p className="hp-placeholder-note">
-            Snapshot as of {SNAPSHOT.asOf} — early sample, still collecting.
+            Snapshot as of {SNAPSHOT.asOf} — full dataset so far, still collecting.
             Full write-up and live metrics coming soon.
+          </p>
+        </div>
+
+        <div className="hp-charts">
+          <div className="hp-section-label">The data · first week online</div>
+          {CHARTS.map((c) => (
+            <figure className="hp-figure" key={c.src}>
+              <a href={c.src} target="_blank" rel="noopener noreferrer" title="Open full size">
+                <img src={c.src} alt={c.alt} loading="lazy" />
+              </a>
+              <figcaption>{c.caption}</figcaption>
+            </figure>
+          ))}
+          <p className="hp-placeholder-note">
+            Charts as of {CHARTS_AS_OF} (last day partial) — aggregates only.
+            Click a chart to open it full size.
           </p>
         </div>
       </div>
