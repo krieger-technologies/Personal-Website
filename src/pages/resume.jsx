@@ -38,7 +38,7 @@ const Resume = () => {
         </p>
         <ul>
           <li>
-            Standing up a new production reporting platform serving ~400 users to new infrastructure, including data source migration, indexing, security groups, 
+            Stood-up a new production reporting platform serving ~400 users on new infrastructure, including data source migration, indexing, security groups, 
             and configuring global settings with tenant specific settings to preserve load performance, security, and urgent notification functions when they arise
           </li>
           <li>
@@ -53,7 +53,7 @@ const Resume = () => {
             Ensuring that key client reports can pull from multiple Warehouse Management Systems (WMS) and output a single standardized report
           </li>
           <p></p>
-          <li><b>Tools:</b> SQL Server Management Studio, Azure Data Factory, t-SQL</li>
+          <li><b>Tools:</b> SQL Server Management Studio, Azure Data Factory, SQL</li>
         </ul>
         <h3>
           <u>Inmar Intelligence, Product Life Cycle Engineering</u>
@@ -74,7 +74,7 @@ const Resume = () => {
             and updating SQL queries across multiple reports. On average saving 5+ hours and improving accuracy and efficiency of our workstreams
           </li>
           <li>Conversion of several suites of reports from platforms scheduled to be decommissioned onto my team’s reporting platform. Over 50 reports across 3 reporting platforms.</li>
-          <li>Development of new reporting and analytics for clients and internal monitoring inculding Advanced Shipment Notifications and Warehouse Container Processing Times</li>
+          <li>Development of new reporting and analytics for clients and internal monitoring including Advanced Shipment Notifications and Warehouse Container Processing Times</li>
           <p></p>
           <li><b>Tools:</b> Incorta, Spark SQL, PySpark, Python, Excel</li>
         </ul>
@@ -93,23 +93,23 @@ const Resume = () => {
             achieve $5-10MM in quarterly efficiencies
           </li>
           <li>
-            I built a custom forcasting tool with the Facebook Prophet open source model to help with demand planning.
+            Built a custom forecasting tool with the Facebook Prophet open source model to help with demand planning.
           </li>
           <li>
-            I built several Python automations to reduce our technical debt, reduce our odds of human error, and cut reporting turn around time down from
+            Built several Python automations to reduce our technical debt, reduce our odds of human error, and cut reporting turnaround time down from
             3+ hours to minutes
           </li>
           <li>
-            Migration of a Product Scorecard report from Excel into a much more robust PowerBI report complete with more in depth metrics and views and automated refreshes from a live database
+            Migration of a Product Scorecard report from Excel into a much more robust Power BI report complete with more in-depth metrics and views and automated refreshes from a live database
           </li>
           <p></p>
           <li><b>Tools:</b> Power BI, Python, SQL, Excel, Snowflake</li>
         </ul>
         <h3><u>Education</u></h3>
-        <h4>Michigan State University, B.A. of Economics
+        <h4>Michigan State University, B.A. in Economics
           <br />2019
         </h4>
-        <p>Minor in Data Analytics; with special focus on Econometrics, programming in python & R, and
+        <p>Minor in Data Analytics; with special focus on Econometrics, programming in Python & R, and
           statistics
         </p>
       </div>
