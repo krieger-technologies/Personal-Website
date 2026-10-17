@@ -13,7 +13,7 @@ export default function Projects() {
     { title: "News Scraper", blurb: "Live tracking of bans in U.S. news headlines", component: NewsScraperCard },
     { title: "News Scraper - Methodology", blurb: "How the data is collected, tagged, and published", component: NewsScraperExplanation },
     // { title: "AI-Assisted Migration", blurb: "", component: AiMigrationCard },
-    { title: "Cyber Security / Cowrie SSH Honeypot", blurb: "Capturing and analyzing live botnet traffic", status: "In progress", component: HoneypotCard },
+    { title: "Cybersecurity / Cowrie SSH Honeypot", blurb: "Capturing and analyzing live botnet traffic", status: "In progress", component: HoneypotCard },
     // { title: "Home Lab Setup", blurb: "", component: HomeLabCard }
   ];
 
