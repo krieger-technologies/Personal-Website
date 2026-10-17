@@ -8,15 +8,20 @@ import HoneypotCard from '../components/cards/Honeypot';
 import { useRef, useState, useEffect, useCallback } from 'react';
 
 export default function Projects() {
+  // title + blurb also drive the index above the carousel
   const projectData = [
-    { title: "News Scraper", component: NewsScraperCard },
-    { title: "News Scraper - Methodology", component:NewsScraperExplanation},
-    // { title: "AI-Assisted Migration", component: AiMigrationCard },
-    { title: "Cowrie SSH Honeypot", component: HoneypotCard },
-    // { title: "Home Lab Setup", component: HomeLabCard }
+    { title: "News Scraper", blurb: "Live tracking of bans in U.S. news headlines", component: NewsScraperCard },
+    { title: "News Scraper - Methodology", blurb: "How the data is collected, tagged, and published", component: NewsScraperExplanation },
+    // { title: "AI-Assisted Migration", blurb: "", component: AiMigrationCard },
+    { title: "Cyber Security / Cowrie SSH Honeypot", blurb: "Capturing and analyzing live botnet traffic", status: "In progress", component: HoneypotCard },
+    // { title: "Home Lab Setup", blurb: "", component: HomeLabCard }
   ];
 
   const firstProjectRef = useRef(null);
+
+  // index <-> carousel: clicking an index item jumps to its card; the active card is highlighted
+  const [swiper, setSwiper] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // Drop the top/bottom fade at either end of the scroll so the first and last lines stay readable
   const [atTop, setAtTop] = useState(true);
@@ -69,23 +74,40 @@ useEffect(() => {
         onScroll={checkBottom}
       >
         <h1>Projects</h1>
-        <p>
-          Personal projects I've built to learn new tools and dig into topics I find interesting.
+        <p className="projects-intro">
+          Things I've built to learn new tools and dig into what interests me.
         </p>
-            <ol>
-            <li><b>News Scraper</b> - Live results & basic analytics about bans in news headlines across the U.S.</li>
-            <li><b>News Scraper : </b><i>Methodology</i> - How the pipeline collects, tags, and publishes the data</li>
-            <li><b>Honeypot / Cybersecurity</b> - [IN PROGRESS] Exploration into collecting & analyzing live botnet traffic safely</li>
-            </ol>
 
-        <div style={{ marginTop: "30px" }}>
-        <ProjectCarousel
-          projects={projectData}
-          parentRef={firstProjectRef}
-          newsSummaryBarChartUrl={newsSummaryBarChartUrl}
-          newsDetailTableUrl={newsDetailTableUrl}
-          newsMetadataUrl={newsMetadataUrl}
-        />
+        <ol className="project-index">
+          {projectData.map((proj, i) => (
+            <li key={proj.title}>
+              <button
+                type="button"
+                className={i === activeIndex ? 'active' : undefined}
+                aria-current={i === activeIndex ? 'true' : undefined}
+                onClick={() => swiper?.slideTo(i)}
+              >
+                <span className="project-index-num">{String(i + 1).padStart(2, '0')}</span>
+                <span>
+                  <span className="project-index-title">{proj.title}</span>
+                  {proj.status && <span className="project-index-status">{proj.status}</span>}
+                  <span className="project-index-blurb">{proj.blurb}</span>
+                </span>
+              </button>
+            </li>
+          ))}
+        </ol>
+
+        <div className="projects-carousel-wrap">
+          <ProjectCarousel
+            projects={projectData}
+            parentRef={firstProjectRef}
+            onSwiperReady={setSwiper}
+            onActiveChange={setActiveIndex}
+            newsSummaryBarChartUrl={newsSummaryBarChartUrl}
+            newsDetailTableUrl={newsDetailTableUrl}
+            newsMetadataUrl={newsMetadataUrl}
+          />
         </div>
       </div>
     </div>

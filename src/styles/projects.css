@@ -108,6 +108,90 @@ body {
 }
 
 /* ================================
+   Project Index (above the carousel)
+   ================================ */
+.projects-intro {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 20px;
+}
+
+.project-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-index button {
+  display: grid;
+  grid-template-columns: 2.25em 1fr;
+  align-items: baseline;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.project-index button:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.project-index button.active {
+  opacity: 1;
+  border-left-color: #3f3cdaff; /* same accent as the active chart tab */
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.project-index button:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.project-index-num {
+  font-size: 0.8em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.project-index-title {
+  font-weight: 600;
+}
+
+.project-index-status {
+  margin-left: 8px;
+  padding: 1px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 4px;
+  font-size: 0.65em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  opacity: 0.8;
+}
+
+.project-index-blurb {
+  display: block;
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+
+.projects-carousel-wrap {
+  margin-top: 24px;
+}
+
+/* ================================
    News Scraper Card Layout Fix
    ================================ */
 

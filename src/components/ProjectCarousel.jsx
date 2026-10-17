@@ -10,6 +10,8 @@ import "../styles/project-carousel.css";
 export default function ProjectCarousel({
   projects,
   parentRef,
+  onSwiperReady,
+  onActiveChange,
   newsSummaryBarChartUrl,
   newsDetailTableUrl,
   newsMetadataUrl,
@@ -108,8 +110,11 @@ export default function ProjectCarousel({
           swiper.on("slideChange", () => {
             syncTopPagination(swiper);
             handleSlideChange();
+            onActiveChange?.(swiper.activeIndex);
           });
           swiper.on("paginationRender", () => syncTopPagination(swiper));
+
+          onSwiperReady?.(swiper);
         }}
         onSlideChangeTransitionStart={handleSlideChange}
       >
