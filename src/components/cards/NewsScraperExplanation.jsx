@@ -176,20 +176,20 @@ export default function NewsScraperExplanation() {
         <p>
         <u><b>A few notes & details about the process:</b></u>
         <ul>
-            <li>A Google news alert into an email address I setup just for this project seemed like the easiest way to begin aggregating a large volume of real world data.
+            <li>A Google news alert into an email address I set up just for this project seemed like the easiest way to begin aggregating a large volume of real world data.
                 A throwaway email has the benefit of keeping my main personal email address clean and free of clutter. In future iterations it might be interesting to test out some ideas
                 on how to cast a wider net or selectively scrape/avoid specific news sources.
             </li>
-            <li>The cron job → lambda function → EC2 instance is very useful combination I discovered that enables me to run my data scraping / cleaning script at regular intervals
-                without needing to keep my personal laptop on 24/7 or pay for unecessary resources from AWS. These tools cost me about $4/month.<br/>
-                Staying on top of text parsing is a never ending task, but provides a fun puzzle in how to accurately parse and organize hundreds and thousands of headlines.
+            <li>The cron job → lambda function → EC2 instance is a very useful combination I discovered that enables me to run my data scraping / cleaning script at regular intervals
+                without needing to keep my personal laptop on 24/7 or pay for unnecessary resources from AWS. These tools cost me about $4/month.<br/>
+                Staying on top of text parsing is a never ending task, but provides a fun puzzle in how to accurately parse and organize tens of thousands of headlines.
                 Maybe in some future iteration I will try my hand at some more advanced analytics on this data.
             </li>
             <li>
-                JSON is not an effcient storage format for this type of data repository. I did briefly set up an RDS database and API connection, but quickly shut it down since
+                JSON is not an efficient storage format for this type of data repository. I did briefly set up an RDS database and API connection, but quickly shut it down since
                 I didn't want to have to pay for API calls to a live database hosted on AWS. In a future iteration I will switch to parquet file data storage.
             </li>
-            <li>I also have set up a sort of ETL processing history in my S3 bucket that retains the last 30 days of metadata in case something breaks and I need to truobleshoot</li>
+            <li>I also have set up a sort of ETL processing history in my S3 bucket that retains the last 30 days of metadata in case something breaks and I need to troubleshoot.</li>
         </ul>
         </p>
         <p>

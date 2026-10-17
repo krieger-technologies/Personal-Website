@@ -38,8 +38,8 @@ const Resume = () => {
         </p>
         <ul>
           <li>
-            Stood-up a new production reporting platform serving ~400 users on new infrastructure, including data source migration, indexing, security groups, 
-            and configuring global settings with tenant specific settings to preserve load performance, security, and urgent notification functions when they arise
+            Stood up a new production reporting platform serving ~400 users on new infrastructure, including data source migration, indexing, security groups, 
+            and configuring global settings with tenant-specific settings to preserve load performance, security, and urgent notification functions when they arise
           </li>
           <li>
             Reverse-engineered an undocumented Alteryx workflow and rebuilt it as a transactional T-SQL stored procedure with ADF orchestration, 
@@ -57,7 +57,7 @@ const Resume = () => {
         </ul>
         <h3>
           <u>Inmar Intelligence, Product Life Cycle Engineering</u>
-          <br />November,  2022 - February, 2025
+          <br />November 2022 - February 2025
         </h3>
         <h4>
           Associate Data Engineer, Data Analytics
@@ -67,7 +67,7 @@ const Resume = () => {
         </p>
         <ul>
           <li>
-            Reducing our schema load times by 50% through optimizing spark settings
+            Reducing our schema load times by 50% through optimizing Spark settings
           </li>
           <li>
             Built Python automations to reduce technical debt and improve project planning by parsing XML files, generating text from planning documents,
