@@ -13,7 +13,7 @@ export default function NewsScraperExplanation() {
             <div className="pipeline-eyebrow">Pipeline Overview</div>
             <h2 className="pipeline-title">News Scraper — ETL Architecture</h2>
             <p className="pipeline-subtitle">
-              End-to-end pipeline scraping Google Alert emails to classify U.S. legislative
+              ETL pipeline scraping Google Alert emails to classify U.S. legislative
               ban headlines by state and topic, publishing live data to a React frontend.
             </p>
           </div>
@@ -169,9 +169,9 @@ export default function NewsScraperExplanation() {
 
         </div>{/* end pipeline-card */}
         <p>
-        This started out as a relatively simple project in concept, but spanned many new and interesting fields of tech to pull off.<br/>
+        This started out as a relatively simple project in concept, but spanned many new and interesting fields to pull off.<br/>
         The idea is simple, find some easily scrape-able and often updated news source, and do some basic analysis. My stretch goal was to fully automate it and
-        make it a living process anyone with internet access can view. Here are some of the trials and tribulations I've faced;</p>
+        make it a living process anyone with internet access can view. Here are some of the hurdles I've overcome;</p>
         <p>
         <p>
         <u><b>A few notes & details about the process:</b></u>
@@ -202,10 +202,6 @@ export default function NewsScraperExplanation() {
             create the EC2 instance and use lambda + cron to turn on the environment, run my script, then turn the instance back off once complete. 
             </li>
         </ul></p>
-        <p>
-        Although my website and this project might be simple by many standards, it still easily achieves enough complexity to offer a host of other efficiencies and options
-        to explore and further improve/expand on.
-        </p>
         </div>
     </div>
   );

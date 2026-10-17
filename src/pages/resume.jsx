@@ -29,20 +29,20 @@ const Resume = () => {
       >
         <h1>Resume</h1>
         <h3>
-            <u>DHL - North America, Data Analytics</u>
+            <u>DHL - North America, Analytics</u>
             <br />February 2025 - Present
         </h3>
-        <h4>Senior Data Engineer, Data Analytics</h4>
+        <h4>Data Engineer, Analytics</h4>
         <p>
           DHL acquired Inmar Intelligence in Feb 2025. My team develops and maintains e-commerce returns reporting for internal and external users.
         </p>
         <ul>
           <li>
-            Built Python scripting automations to reduce technical debt and improve project planning by parsing XML files, generating text from planning documents,
-            and updating SQL queries across multiple reports. On average saving 5+ hours per sprint and improving accuracy and efficiency of our workstreams
+            Standing up a new production reporting platform serving ~400 users to new infrastructure, including data source migration, indexing, security groups, 
+            and configuring global settings with tenant specific settings to preserve load performance, security, and urgent notification functions when they arise
           </li>
           <li>
-            Reverse-engineered an undocumented legacy Alteryx workflow and rebuilt it as a transactional T-SQL stored procedure with ADF orchestration, 
+            Reverse-engineered an undocumented Alteryx workflow and rebuilt it as a transactional T-SQL stored procedure with ADF orchestration, 
             preventing a client's monthly commission reporting from being disrupted during a company-wide tool deprecation
           </li>
           <li>
@@ -67,10 +67,14 @@ const Resume = () => {
         </p>
         <ul>
           <li>
-            Reducing our schema load times by 50% through organization and optimization of spark settings
+            Reducing our schema load times by 50% through optimizing spark settings
           </li>
-          <li>Conversion of several suites of reports from platforms scheduled to be decommissioned onto my team’s reporting platform. Over 50 reports across 3 platforms to date.</li>
-          <li>Development of new reporting and analytics for clients and internal monitoring</li>
+          <li>
+            Built Python automations to reduce technical debt and improve project planning by parsing XML files, generating text from planning documents,
+            and updating SQL queries across multiple reports. On average saving 5+ hours and improving accuracy and efficiency of our workstreams
+          </li>
+          <li>Conversion of several suites of reports from platforms scheduled to be decommissioned onto my team’s reporting platform. Over 50 reports across 3 reporting platforms.</li>
+          <li>Development of new reporting and analytics for clients and internal monitoring inculding Advanced Shipment Notifications and Warehouse Container Processing Times</li>
           <p></p>
           <li><b>Tools:</b> Incorta, Spark SQL, PySpark, Python, Excel</li>
         </ul>
@@ -85,12 +89,18 @@ const Resume = () => {
           Danone is one of the largest dairy and dairy alternative manufacturers in North America where I supported Sales and Go-To-Market teams with analytics on pricing, promotions, and retail placements.
         </p>
         <ul>
-          <li>Delivery of key insights and tooling to all other business units. Our reporting and tools were used to regularly
+          <li>Delivery of key insights around pricing and demand to all other business units. Our reporting and tools were used to regularly
             achieve $5-10MM in quarterly efficiencies
           </li>
           <li>
-            Stakeholders used our reporting and insights to focus on price pack architecture,
-            trade strategies, long-term funding strategies, program analytics, and customer willingness to pay
+            I built a custom forcasting tool with the Facebook Prophet open source model to help with demand planning.
+          </li>
+          <li>
+            I built several Python automations to reduce our technical debt, reduce our odds of human error, and cut reporting turn around time down from
+            3+ hours to minutes
+          </li>
+          <li>
+            Migration of a Product Scorecard report from Excel into a much more robust PowerBI report complete with more in depth metrics and views and automated refreshes from a live database
           </li>
           <p></p>
           <li><b>Tools:</b> Power BI, Python, SQL, Excel, Snowflake</li>
