@@ -56,10 +56,10 @@ export default function Projects() {
 
 useEffect(() => {
   setNewsSummaryBarChartUrl(
-    "/news_data/public_news_data_bar_chart.json"
+    "/news_data/news_summary.json"
   );
   setNewsDetailTableUrl(
-    "/news_data/public_news_detail_table.json"
+    "/news_data/news_latest.json"
   );
   setNewsMetadataUrl(
     "/news_data/last_run_timestamp.json"
