@@ -5,5 +5,5 @@ import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
 // plotly.js is huge and probes <canvas> at import time (jsdom has no canvas).
-// No test renders a chart, so stub the React wrapper globally.
-vi.mock('react-plotly.js', () => ({ default: () => null }));
+// No test renders a chart, so stub the slim Plot wrapper globally.
+vi.mock('./components/cards/Plot', () => ({ default: () => null }));

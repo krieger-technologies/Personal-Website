@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Plot from "react-plotly.js";
+import Plot from "./Plot";
 
 // Tag data-file requests with the pipeline's last-run timestamp so the browser
 // and CloudFront can cache them long-term, while a new ETL run (new timestamp)
