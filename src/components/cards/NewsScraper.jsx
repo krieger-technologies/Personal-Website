@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo, useRef } from "react";
-import Plot from "react-plotly.js";
+import { useState, useEffect, useRef } from "react";
+import Plot from "./Plot";
 
 // Tag data-file requests with the pipeline's last-run timestamp so the browser
 // and CloudFront can cache them long-term, while a new ETL run (new timestamp)
@@ -16,7 +16,8 @@ export default function NewsScraperCard({
   metadataUrl,
   onContentReady,
 }) {
-  const [chartData, setChartData] = useState(null);
+  // per-date-range aggregates precomputed by the ETL (chart, map, counts)
+  const [summary, setSummary] = useState(null);
   const [error, setError] = useState(null);
   const [isNarrow, setIsNarrow] = useState(window.innerWidth < 600);
   const [detailData, setDetailData] = useState(null);
@@ -76,7 +77,7 @@ export default function NewsScraperCard({
     // Listen for resize / orientation change
     window.addEventListener("resize", updateWidth);
 
-    // --- Bar-chart summary ---
+    // --- Chart/map summary ---
     fetch(withVersion(newsSummaryBarChartUrl, dataVersion))
       .then((res) => {
         if (!res.ok) throw new Error(res.status);
@@ -84,11 +85,7 @@ export default function NewsScraperCard({
       })
       .then((data) => {
         if (!isMounted) return;
-        const records = Array.isArray(data)
-          ? data
-          : data.data || data.records || [];
-
-        setChartData(records);
+        setSummary(data);
         // 🔑 Force Swiper to re-measure once content exists
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
@@ -102,7 +99,7 @@ export default function NewsScraperCard({
         setError("Network error while loading chart data");
       });
 
-    // --- Row-level detail table ---
+    // --- Row-level detail table (latest rows only, newest first) ---
     fetch(withVersion(newsDetailTableUrl, dataVersion))
       .then((res) => {
         if (!res.ok) throw new Error(res.status);
@@ -123,108 +120,15 @@ export default function NewsScraperCard({
       window.removeEventListener("resize", updateWidth);
     };
   }, [newsSummaryBarChartUrl, newsDetailTableUrl, dataVersion]);
-    // standardize & format dates
-    const parseAlertDate = (s) => {
-      if (!s) return null;
-
-      // ISO date: 2026-01-19
-      if (/^\d{4}-\d{2}-\d{2}/.test(s)) {
-        const d = new Date(s.replace(" ", "T")); // handles "YYYY-MM-DD HH:MM:SS" too
-        return Number.isNaN(d.getTime()) ? null : d;
-      }
-
-      // US date: 1/19/2026 or 01/19/2026
-      const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-      if (m) {
-        const mm = Number(m[1]), dd = Number(m[2]), yyyy = Number(m[3]);
-        const d = new Date(yyyy, mm - 1, dd);
-        return Number.isNaN(d.getTime()) ? null : d;
-      }
-
-      const d = new Date(s);
-      return Number.isNaN(d.getTime()) ? null : d;
-    };
-
-    // Create filter for charts & table
-  const filteredDetailData = useMemo(() => {
-  if (!Array.isArray(detailData)) return [];
-  if (dateRange === "all") return detailData;
-
-  const now = new Date();
-  const start = new Date(now);
-  start.setHours(0, 0, 0, 0);
-
-  if (dateRange === "7d") start.setDate(start.getDate() - 7);
-  else if (dateRange === "30d") start.setDate(start.getDate() - 30);
-  else if (dateRange === "90d") start.setDate(start.getDate() - 90);
-
-  return detailData.filter((row) => {
-    const d = parseAlertDate(row.alert_date);
-    if (!d) return false;
-    return d >= start;
-    });
-  }, [detailData, dateRange]);
-
-  // Build map data from the SAME filtered rows as the table
-  const mapRows = useMemo(() => {
-    if (!Array.isArray(filteredDetailData)) return [];
-
-    const map = new Map();
-
-    for (const row of filteredDetailData) {
-      const state = row.state || "";
-      const abbrev = row.state_abbrev || null;
-      const topic = typeof row.target === "string" ? row.target.trim() : "";
-      if (!state || !abbrev) continue;
-
-      if (!map.has(abbrev)) map.set(abbrev, { state, count: 0, topics: new Set() });
-      const obj = map.get(abbrev);
-      obj.count += 1;
-      if (topic && topic.toLowerCase() !== "null") obj.topics.add(topic);
-    }
-
-    return [...map.entries()].map(([abbrev, v]) => ({
-      abbrev,
-      state: v.state,
-      count: v.count,
-      topics: [...v.topics].sort().join(", "),
-    }));
-  }, [filteredDetailData]);
-
-// Build bar chart from the SAME filtered rows as the table
-  const chartRows = useMemo(() => {
-    if (!Array.isArray(filteredDetailData)) return [];
-
-    // topic -> { count, states:Set }
-    const map = new Map();
-
-    for (const row of filteredDetailData) {
-      const rawTopic = row.target;
-      const topic = typeof rawTopic === "string" ? rawTopic.trim() : "";
-      const state = row.state || "—";
-      // Ignore parsing failures / empty topics for the BAR CHART only
-      if (!topic || topic.toLowerCase() === "null" || topic === "—") continue;
-
-      if (!map.has(topic)) map.set(topic, { count: 0, states: new Set() });
-      const obj = map.get(topic);
-
-      obj.count += 1;
-      if (state && state !== "—") obj.states.add(state);
-    }
-
-    return [...map.entries()]
-      .map(([target, v]) => ({
-        target,
-        count_of_news_articles: v.count,
-        states: [...v.states].sort().join(", "),
-      }))
-      .sort((a, b) => b.count_of_news_articles - a.count_of_news_articles)
-      .slice(0, 10);
-  }, [filteredDetailData]);
+  // Chart, map and counts for the selected range come precomputed from the
+  // ETL (windows anchored to the nightly run), so only small files are fetched.
+  const rangeSummary = summary?.windows?.[dateRange];
+  const chartRows = rangeSummary?.top_targets ?? [];
+  const mapRows = rangeSummary?.states ?? [];
 
   if (error) return <p style={{ color: "red" }}>{error}</p>;
-  if (!Array.isArray(chartData)) return <p>Loading chart…</p>;
-  if (chartData.length === 0) return <p>No news data available.</p>;
+  if (!summary) return <p>Loading chart…</p>;
+  if (!summary.total_articles) return <p>No news data available.</p>;
 
   const x = chartRows.map((d) => d.target);
   const y = chartRows.map((d) => d.count_of_news_articles || 0);
@@ -250,7 +154,7 @@ export default function NewsScraperCard({
             </div>
           )}
 
-        {/* DATE RANGE FILTER (affects table now, chart later) */}
+        {/* DATE RANGE FILTER (chart + map; the table always shows the latest rows) */}
          <div className="news-filters">
            <label className="news-filter-label">
              Date range:&nbsp;
@@ -260,14 +164,15 @@ export default function NewsScraperCard({
              >
                <option value="7d">Last 7 days</option>
                <option value="30d">Last 30 days</option>
+               <option value="60d">Last 60 days</option>
                <option value="90d">Last 90 days</option>
                <option value="all">All time</option>
              </select>
            </label>
          </div>
          <div className="news-filter-stats">
-           Parsing {filteredDetailData.length} of{" "}
-           {Array.isArray(detailData) ? detailData.length : 0} articles
+           Parsing {rangeSummary?.article_count ?? 0} of{" "}
+           {summary.total_articles} articles
          </div>
         {/* CHART VIEW TAB SWITCHER */}
         <div className="news-chart-tabs">
@@ -399,7 +304,7 @@ export default function NewsScraperCard({
             }}
           />
         )}
-          {Array.isArray(filteredDetailData) && filteredDetailData.length > 0 && (
+          {Array.isArray(detailData) && detailData.length > 0 && (
             <div className="news-detail-table">
               <table>
                 <thead>
@@ -412,20 +317,8 @@ export default function NewsScraperCard({
                   </tr>
                 </thead>
                 <tbody>
-                  {[...filteredDetailData].sort((a, b) => {
-                    // sort table by date (copy first — never mutate the memoized array)
-                    const da = parseAlertDate(a.alert_date);
-                    const db = parseAlertDate(b.alert_date);
-
-                    // Push invalid or missing dates to the bottom
-                      if (!da) return 1;
-                      if (!db) return -1;
-
-                    return db - da;
-                  })
-                      // 🔢 Pagination (adjust number as needed)
-                  .slice(0, 100)
-                  .map((row, idx) => (
+                  {/* already newest first and capped at 100 by the ETL */}
+                  {detailData.map((row, idx) => (
                     <tr key={idx}>
                       <td>
                         {row.alert_date
